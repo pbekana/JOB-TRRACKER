@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/Timeline.css}">
+</head>
+<body>
+<div class="container">
+    <header class="app-header" role="banner">
+
+        <div class="header-left">
+
+            <div class="brand">
+
+                <div class="brand-mark" aria-hidden="true">
+
+                    <div class="brand-mark-box">
+
+                        <div class="brand-mark-vector" aria-hidden="true">
+                            <img src="/images/886e770a-b523-4bc5-b893-a6c2272e507c.png" alt="company image" class="svgPng">
+                        </div>
+                    </div>
+
+                    <div class="brand-mark-overlay" aria-hidden="true"></div>
+                </div>
+
+
+                <div class="brand-title">
+
+                    <a href="#" class="logo-text">JobTracker</a>
+                </div>
+            </div>
+
+
+            <nav class="primary-nav" aria-label="Primary">
+
+                <a th:href="@{/}" class="nav-item" >Dashboard</a>
+
+                <a th:href="@{/Applications}" class="nav-item">Applications</a>
+
+                <a th:href="@{/Timeline}" class="nav-item">Timeline</a>
+              <div>
+                <a href="#" class="nav-item" id="setting">Settings</a>
+
+                <section class="hidden1" id="section">
+                    <h2>Setting</h2>
+
+                    <label >
+                        <input type="checkbox" id="darkMode">Dark Mode
+                    </label> <br><br>
+
+                    <label >
+                        Language:
+                        <select id="language">
+                            <option value="en">English</option>
+                            <option value="en">Spanish</option>
+                        </select>
+                    </label> <br><br>
+
+                    <label >
+                        <input type="checkbox" id="Email Notifications">Email Notifications
+                    </label> <br><br>
+
+                    <label >
+                        profile visibility:
+                        <select id=" profile visibility">
+                            <option value="PUBLIC">public</option>
+                            <option value="PRIVATE">private</option>
+                        </select>
+                    </label> <br><br>
+                    <button onclick="saveSetting()">Save Settings</button>
+                </section>
+              </div>
+            </nav>
+        </div>
+
+
+        <div class="header-right">
+
+            <div class="search-wrap">
+
+                <div class="search">
+
+                    <div class="search-icon" aria-hidden="true">
+
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="16.5" y1="16.5" x2="22" y2="22" stroke-width="2" stroke-linecap="round"></line>
+                        </svg>
+
+                        <span class="search-icon-overlay" aria-hidden="true"></span>
+                    </div>
+
+
+                    <label class="search-input" aria-label="Search">
+                        <input type="text" placeholder="Search" />
+                    </label>
+                </div>
+            </div>
+
+             <button class="avatar" aria-label="Account">
+                <img th:src="@{/images/Depth 4, Frame 1.png}" alt="Profile"  class="img-prof"/>
+
+
+             </button>
+               <div class="prof" hidden="true">
+                 <h2 id="username" class="hidden">John Doe</h2><br>
+                 <h2 id="userJob" class="hidden">web developer</h2><br>
+                 <button id="submit-btn" onclick="editProfile()" class="hidden">Edit Profile</button>
+               </div>
+        </div>
+    </header>
+
+    <div class="second-container">
+        <div class="third-container">
+            <div class="Timeline">
+                <div class="sub-timeline">
+                    <div class="paragraph">
+                        <h4 id="para2">Timeline</h4>
+                    </div>
+                    <div class="input-field">
+                        <p id="btn">view all activities and updates relates to your job</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="timeline-search">
+                <div class="sub-search">
+                    <div class="input-container">
+                        <div class="icon-container">
+                            <div class="sub">
+                                <img th:src="@{/images/Vector - 0 (1).png}" alt="Profile" />
+                            </div>
+                        </div>
+
+                        <div class="input">
+                            <label for="input"></label>
+                            <input type="text" name="form" class="inputs" placeholder="Search by company,job title,or date" id="input">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+            <div class="fourth-container">
+                <div class="application-subbmission">
+                    <div class="doc">
+                        <div class="doc1">
+                            <img src="/images/Depth 7, Frame 0.png" class="doc-image">
+                        </div>
+                    </div>
+                    <div class="app-sub">
+                        <div class="message">
+                            <p class="app-para">Application Submitted</p>
+                        </div>
+                        <div class="date">
+                            <p class="date-para">june 15,2004</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interview-schedule">
+                    <div class="calender">
+                        <div class="sub-calender">
+                            <img src="/images/Depth 7, Frame 1.png" class="cal-image">
+                        </div>
+                    </div>
+                    <div class="sub-interview">
+                        <div class="msg">
+
+                            <p class="cal-para">Interview scheduled</p>
+                        </div>
+                        <div class="calen">
+                            <p class="calen-date">june 20,2024</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="interview-completted">
+                    <div class="video">
+                        <div class="video-image">
+                            <img src="/images/Depth 8, Frame 0.png" class="v-aimge">
+                        </div>
+
+                    </div>
+                    <div class="sub-interviewCompleted">
+                        <div class="interview-comlpleted">
+                            <p class="interview-para">Interview Completed</p>
+
+                        </div>
+                        <div class="date-completed">
+                            <p class="interview-date">june 25,2024</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="offer-received">
+                    <div class="messages">
+                        <div class="offer-image">
+                            <img src="/images/Depth 7, Frame 1 (1).png" class="o-image">
+                        </div>
+
+                    </div>
+                    <div class="sub-recieved">
+                        <div class="sub-offer">
+                            <p class="receive-para">Offer Received</p>
+
+                        </div>
+                        <div class="date-offer">
+                            <p class="offer-date">july 1,2024</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="offer-accepted">
+                    <div class="icon1">
+                        <div class="accepted-img">
+                            <img src="/images/Depth 7, Frame 1 (2).png" class="accept-image">
+                        </div>
+
+
+                    </div>
+                    <div class="accept-offer">
+                        <div class="accepted">
+                            <p class="accept-para">Offer Accepted</p>
+
+                        </div>
+                        <div class="date-accepted">
+                            <p class="accept-date">july 5,2024</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="next-page">
+                <div class="rightButton-container">
+                    <button class="less"> <img src="/images/Vector - 0 (2).png" alt="previous page-image" class="button-image"> </button>
+                </div>
+
+
+                <button class="one"><h5 class="para-one">1</h5></button>
+
+                <button class="two"><p class="para-two">2</p></button>
+                <button class="three"><p class="para-three">3</p></button>
+                <button class="four"><p class="para-four">4</p></button>
+                <button class="five"><p class="para-five">5</p></button>
+
+
+                <div class="leftButton-container">
+                    <button class="greater"> <img src="/images/Vector - 0 (4).png" alt="next page-image" class="next-image"> </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<script th:src="@{/js/Timeline.js}"></script>
+</body>
+</html>

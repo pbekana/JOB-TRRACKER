@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    button{
+    background-color:blue;
+    padding:3px 3px;
+    border-radius:6px;
+    }
+    nav{
+    display:flex;
+    gap:8px;}
+</style>
+<body>
+<nav>
+
+        <a th:href="@{/Home}">Home</a>
+
+
+        <a th:href="@{/About}">About</a>
+
+</nav>
+<section id="home">
+    <h2>welcome to this website</h2>
+    <button>Get Started</button>
+</section>
+<script>
+    const home=document.getElementById("home");
+    home.addEventListener("click",(e)=>{
+    window.location.href = "/About";
+    });
+</script>
+</body>
+</html>

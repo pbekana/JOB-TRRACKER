@@ -1,0 +1,424 @@
+.container{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: relative;
+width: 1280px;
+height: 852px;
+
+background: #FFFFFF;
+
+}
+.top{
+/* Depth 2, Frame 0 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 12px 40px;
+
+width: 1280px;
+height: 65px;
+
+border-bottom: 1px solid #E6E8EB;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.left-header{
+display: flex;
+align-items: center;
+width: auto;
+height: auto;
+gap: 32px;
+padding: 0px;
+
+order: 0;
+flex-grow: 0;
+flex: none;
+}
+.icon{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: auto;
+height: auto;
+
+order: 0;
+flex-grow: 0;
+flex: none;
+}
+.icon-container{
+display: flex;
+/*width: 16px;
+height: 16px;*/
+
+flex: none;
+order: 0;
+flex-grow: 1;
+}
+.icon#img{
+width: 16px;
+height: 16px;
+position: absolute;
+left: 0px;
+top: 0px;
+
+color: #121417;
+}
+.title{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: auto;
+height: auto;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+#topic{
+/* JobTracker */
+display: flex;
+width: 100px;
+height: 23px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 23px;
+letter-spacing: 0px;
+
+/* identical to box height, or 128% */
+
+color: #121417;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.right-header{
+display: flex;
+justify-content: flex-end;
+align-items: flex-start;
+width: 1068px;
+height: auto;
+gap: 32px;
+
+order: 1;
+flex-grow: 1;
+}
+nav{
+display: flex;
+align-items: center;
+width: auto;
+height: 40px;
+gap: 36px;
+
+order: 0;
+flex-grow: 0;
+flex: none;
+}
+.submit-btn{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 40px;
+    max-width: 480px;
+    border-radius: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    gap: 8px;
+    background: rgba(240, 242, 245, 1);
+    flex: none;
+    flex-grow: 0;
+    order: 1;
+}
+.submit-btn button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border: none;
+
+    flex-grow: 1;
+    flex: none;
+}
+.prof{
+display: flex;
+order: 2;
+}
+.prof-img{
+width: 40px;
+height: 40px;
+border-radius: 20px;
+}
+
+.secondContainer{
+/* Depth 2, Frame 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: flex-start;
+padding: 20px 160px;
+
+width: 1280px;
+height: 787px;
+
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+}
+.thirdContainer{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 960px;
+max-width: 960px;
+height: auto;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: start;
+}
+.app{
+/* Depth 4, Frame 0 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
+padding: 16px;
+gap: 12px;
+
+width: 960px;
+height: 72px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.app.app{
+/* Depth 5, Frame 0 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 288px;
+min-width: 288px;
+height: 40px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+#app{
+/* My Applications */
+
+width: 288px;
+height: 40px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 40px;
+/* identical to box height, or 125% */
+
+color: #121417;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.card{
+/* Depth 4, Frame 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px 12px;
+
+width: 960px;
+height: auto;
+
+flex: none;
+order: 1;
+flex-grow: 1;
+
+}
+.detail{
+/* Depth 5, Frame 0 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px 16px;
+gap: 32px;
+
+width: 960px;
+height: auto;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+}
+/* === Job Card Styling === */
+.job-card {
+  position: relative;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    order: 0;
+  }
+  .job-card img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .job-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    color: #121417;
+  }
+
+  .job-card .date {
+    font-size: 13px;
+    color: #61758A;
+    margin: 0;
+  }
+
+  .job-card p {
+    font-size: 13px;
+    color: #444;
+    margin: 2px 0;
+  }
+  .add-job-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+   /* border: 2px dashed #ccc;*/
+    border-radius: 6px;
+    background: #f9f9f9;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .add-job-btn:hover {
+    background: #eef3ff;
+    border-color: #888;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .delete-btn {
+    background:transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  .delete-btn:hover {
+    color: red;
+  }
+ /* === SETTINGS DROPDOWN === */
+ #section {
+   position: absolute;
+   top: 60px;        /* adjust to appear below header */
+   right: 80px;      /* adjust horizontally */
+   background: #fff;
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   padding: 20px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+   width: 240px;
+   z-index: 1000;    /* ensures it's above the content */
+ }
+
+ #section[hidden] {
+   display: none;
+ }
+
+ #section h2 {
+   font-size: 18px;
+   margin-bottom: 10px;
+ }
+.pprofile{
+position: absolute;
+   top:60px;        /* adjust to appear below header */
+   right: 20px;      /* adjust horizontally */
+   background: #fff;
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   padding: 20px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+   width: 240px;
+   z-index: 1000;    /* ensures it's above the content */
+}
+
+

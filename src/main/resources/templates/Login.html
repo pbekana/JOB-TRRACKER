@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/Login.css}">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="left-head">
+            <div class="title-icon">
+                <div class="title-container">
+                    <img src="/images/Depth 4, Frame 0.png" class="img">
+                </div>
+            </div>
+
+
+            <div class="title">
+                <h2 class="para">Job Tracker</h2>
+            </div>
+        </div>
+
+        <div class="rigth-head">
+            <nav class="home-container">
+                <div class="home">
+                    <a th:href="@{/Home}"><p class="para">Home</p></a>
+                </div>
+                <div class="about">
+                    <a th:href="@{/About}"><p class="para">About</p></a>
+                </div>
+                <div class="contact">
+                    <a th:href="@{/Contacts}"><p class="para">Contact</p></a>
+                </div>
+            </nav>
+
+            <div class="login-container">
+                <div class="login">
+                    <button class="submit-btn"><p class="para-login">Login</p></button>
+                </div>
+
+                <div class="signup">
+                    <button  type="submit"><p class="para-signin">Sign In</p></button>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="second-container">
+        <div class="third-container">
+            <div class="manage-account">
+
+                <p class="para-account">Manage Your Account</p>
+
+            </div>
+
+            <div class="SIGNIN-container">
+                <div class="SIGNIN">
+                    <button type="submit"><p id="para-ls">Sign UP</p></button>
+                </div>
+            </div>
+
+            <div class="demo-container">
+                <p id="demo"></p>
+            </div>
+
+            <div class="LOGIN-container">
+                <div class="LOGIN">
+                    <button type="submit"><p id="para-ll">Login In</p></button>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="google-img">
+                <div class=" google-img-btn">
+
+                   <div id="google-signin-btn"></div>
+                </div>
+            </div>
+
+
+            <div class="cloud-container">
+                <div class="toggle">
+                    <div class="cloud-synic">
+                        <p class="para-cloud">Cloud Sync</p>
+                    </div>
+
+                    <div class="synic-app">
+                        <p class="para-sync">Sync your application data with the cloud for seamless access across devices.</p>
+                    </div>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+
+
+            </div>
+
+            <div class="Export">
+                <div class="sub-Export">
+                    <div class="Export-container">
+                        <p class="export-para">Export as Csv</p>
+                    </div>
+
+                    <div class="detail-export">
+                        <p class="detail-para">Export your application data to a CSV file for offline analysis.</p>
+                    </div>
+                </div>
+
+                <div class="export-btn">
+                    <div class="export-btnContainer">
+                        <button type="submit"><p class="para-expButton">Export</p></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Export-pdf">
+                <div class="sub-ExportPdf">
+                    <div class="Export-containerPDF">
+                        <p class="export-paraPdf">Export as Pdf</p>
+                    </div>
+
+                    <div class="detail-exportPdf">
+                        <p class="detail-paraPdf">Generate a PDF report of your application progress for sharing or archiving.</p>
+                    </div>
+                </div>
+
+                <div class="export-btnPdf">
+                    <div class="export-btnContainerPdf">
+                        <button type="submit"><p class="para-expButtonPdf">Export</p></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="security-container">
+                <p class="security-para">Security</p>
+            </div>
+
+            <div class="password">
+                <div class="sub-password">
+                    <div class="password-container">
+                        <p class="password-para">Change Password</p>
+                    </div>
+
+                    <div class="detail-password">
+                        <p class="detail-parapass">Change your password to maintain account security.</p>
+                    </div>
+                </div>
+
+                <div class="password-btn">
+                    <div class="password-btnContainer">
+                        <button type="submit"><p class="para-password">Change</p></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Delete">
+                <div class="delete-account">
+                    <div class="delete-container">
+                        <p class="delete-para">Delete Account</p>
+                    </div>
+
+                    <div class="detail-delete">
+                        <p class="detail-deletePara"> Delete your account and all associated data permanently.</p>
+                    </div>
+                </div>
+
+                <div class="delete-btn">
+                    <div class="delete-btnContainer">
+                        <button type="submit"><p class="para-Daccount">Delete</p></button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/Login.js}"></script>
+</body>
+</html>
