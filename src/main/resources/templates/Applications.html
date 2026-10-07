@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+</head>
+<body>
+<div class="container">
+    <div class="top">
+        <div class="container2">
+            <div class="icon">
+                <div class="icon1">
+
+                    <img src="/images/886e770a-b523-4bc5-b893-a6c2272e507c.png" id="img">
+
+                </div>
+            </div>
+            <div class="title">
+                <h2 id="topic">JobTracker</h2>
+            </div>
+        </div>
+        <div class="link">
+            <nav>
+                <div class="dash">
+                    <a th:href="@{/}"><p id="dash">Dashboard</p></a>
+                </div>
+                <div class="application">
+                    <a th:href="@{/Applications}"><p id="application">Application</p></a>
+                </div>
+                <div class="setting">
+                    <a href="#" id="set"><p id="setting">Setting</p></a>
+
+                    <section  id="section" hidden="true">
+                        <h2>Setting</h2>
+
+                        <label >
+                            <input type="checkbox" id="darkMode">Dark Mode
+                        </label> <br><br>
+
+                        <label >
+                            Language:
+                            <select id="language">
+                                <option value="en">English</option>
+                                <option value="en">Spanish</option>
+                            </select>
+                        </label> <br><br>
+
+                        <label >
+                            <input type="checkbox" id="Email Notifications">Email Notifications
+                        </label> <br><br>
+
+                        <label >
+                            profile visibility:
+                            <select id=" profile visibility">
+                                <option value="PUBLIC">public</option>
+                                <option value="PRIVATE">private</option>
+                            </select>
+                        </label> <br><br>
+
+                        <button onclick="saveSetting()">Save Settings</button>
+                    </section>
+                </div>
+            </nav>
+           <div class="IMG-container">
+               <a href="#" class="prof-container"><img src="/images/Depth 4, Frame 1.png" alt="profile image" class="prof-image"></a>
+               <div id="container-profile" hidden="true">
+                  <h2 id="username" class="hidden"  >John Doe</h2>
+                  <p id="userBio"  class="hidden">Web Developer</p>
+                  <button onclick="editProfile()" id="prof-btn"  class="hidden">Edit Profile</button>
+               </div>
+           </div>
+        </div>
+    </div>
+    <div class="secondContainer">
+        <div class="thirdContainer">
+            <div class="container-1">
+                <div class="sub-container">
+                    <h1 id="para1">Add New Application</h1>
+                </div>
+            </div>
+
+            <div class="fcontainer">
+                <div class="all-container">
+                    <div class="para">
+                        <p id="para-para">Compnay Name</p>
+                    </div>
+
+                    <div class="padding">
+                        <label for="company"></label>
+                        <input type="text" id="company" placeholder="Enter company name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="scontainer">
+                <div class="all-container">
+                    <div class="para">
+                        <p id="para-para">Job Title</p>
+                    </div>
+                    <div class="padding">
+                        <label for="job"></label>
+                        <input type="text" id="job"  placeholder="Enter job title">
+                    </div>
+                </div>
+            </div>
+
+            <div class="tcontainer">
+                <div class="form-group2">
+                    <div class="para">
+                        <p id="para-para">Job Description</p>
+                    </div>
+                    <div>
+                        <label for="description"></label>
+                        <textarea class="confirmation2" id="description"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Resume">
+                <div class="all-container">
+                    <div class="para">
+                        <p id="para-para">Resume</p>
+                    </div>
+
+                    <div class="padding">
+                        <label for="resume-upload"></label>
+                        <input type="file" id="resume-upload" placeholder="Upload resume">
+                    </div>
+                </div>
+            </div>
+
+            <div class="cover">
+                <div class="all-container">
+                    <div class="para">
+                        <p id="para-para">Cover leter</p>
+                    </div>
+
+                    <div class="padding">
+                        <label for="cover-upload"></label>
+                        <input type="file" id="cover-upload">
+                    </div>
+                </div>
+            </div>
+
+            <div class="application-link">
+                <div class="all-container">
+                    <div class="para">
+                        <p id="para-para">Application Link</p>
+                    </div>
+
+                    <div class="padding">
+                        <label for="app-link"></label>
+                        <input type="text" id="app-link" placeholder="Enter Application Link">
+                    </div>
+                </div>
+            </div>
+
+            <div class="Status">
+                <div class="all-container">
+                    <div class="para">
+                        <p id="para-para">Status</p>
+                    </div>
+
+                    <div class="padding">
+                        <label for="status-select"></label>
+                        <select id="status-select">
+                            <option value="APPLIED">Applied</option>
+                            <option value="INTERVIEWING">Interview</option>
+                            <option value="OFFER">Offered</option>
+                            <option value="REJECTED">Rejected</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Interview">
+                <div class="all-container">
+                    <div class="para">
+                        <p id="para-para">Interview Date</p>
+                    </div>
+
+                    <div class="padding">
+                        <label for="interview-date">Select Date</label>
+                        <input type="date" id="interview-date">
+                    </div>
+                </div>
+            </div>
+
+            <div class="Notes">
+                <div class="Notes-container">
+                    <div class="para">
+                        <p id="para-para">Notes</p>
+                    </div>
+
+                    <div class="notes">
+                        <label for="notes"></label>
+                        <textarea name="notes" id="notes"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ten-container">
+                <div class="from-group9">
+                    <button type="submit" class="btns">Save Application</button>
+                </div>
+
+                <div class="lbutton">
+                    <button type="submit" class="btns1" >view Aplication</button>
+                </div>
+            </div>
+            <p id="Status"></p>
+
+            <div class="saved-applications">
+                <h2 id="saved">Saved Applications</h2>
+                <div id="appList"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/application.js}"></script>
+</body>
+</html>

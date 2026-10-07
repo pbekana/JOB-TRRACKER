@@ -1,0 +1,26 @@
+{
+  "id": "FEAT-001",
+  "type": "fix",
+  "description": "Fix the Applications form: (1) remove duplicate id='para-upload' attributes on 5 elements, assigning each a unique id; (2) make file uploads optional in application.js so the form saves without requiring resume/cover-letter files; (3) fix Login.js to use res.text() instead of res.json() when parsing the /login response (which returns plain text); (4) fix the Login.css para-ll color bug (white text on white button) and make Login.css responsive by replacing fixed 1280px widths with 100%/max-width.",
+  "status": "completed",
+  "steps": [
+    "Read Applications.html at /home/simon/Downloads/JOB-TRRACKER-main/src/main/resources/templates/Applications.html. Find the 5 elements with id='para-upload': (1) resume file input in .Resume div, (2) cover letter file input in .cover div, (3) application link text input in .application-link div, (4) status select in .Status div, (5) interview date input in .Interview div. Change their ids to: resume-upload, cover-upload, app-link, status-select, interview-date respectively. Fix the matching <label for='para-upload'> attributes on each to use the new ids.",
+    "Read application.js at /home/simon/Downloads/JOB-TRRACKER-main/src/main/resources/static/js/application.js. Remove the guard block that returns early when resumeFile or coverFile are missing (the 'if (!resumeFile || !coverFile)' check). Make the file upload conditional: wrap the FormData POST to /api/uploads in an 'if (resumeFile || coverFile)' block; if no files are selected, set uploadRes = { resumePath: '', coverLetterPath: '' } directly. The status, appLink, interviewDate readings via CSS class selectors are already correct — do not change them.",
+    "Read Login.js at /home/simon/Downloads/JOB-TRRACKER-main/src/main/resources/static/js/Login.js. In the handleLogin function, change 'res.ok ? res.json() : Promise.reject(...)' to 'res.ok ? res.text() : Promise.reject(...)'. The /login endpoint (LoginController.java) returns ResponseEntity<String> (plain text), not JSON.",
+    "Read Login.css at /home/simon/Downloads/JOB-TRRACKER-main/src/main/resources/static/css/Login.css. (a) Fix .para-ll: change 'color: #FFFFFF' to 'color: #121417' (currently white text on light background, invisible). (b) Replace all 'width: 1280px' with 'width: 100%' and add 'max-width: 1280px' and 'margin: 0 auto' on .container. (c) Replace 'width: 1280px; height: 792px' on .second-container with 'width: 100%; height: auto'. (d) Replace 'width: 1063px' on .rigth-head with 'width: auto; flex: 1'. (e) Replace 'width: 960px' on .third-container, .manage-account, .Export, .Export-pdf, .password, .Delete with 'width: 100%'. (f) Add a @media (max-width: 768px) block that sets header flex-direction to column and reduces padding.",
+    "Run ./mvnw compile -q from /home/simon/Downloads/JOB-TRRACKER-main and confirm exit code 0."
+  ],
+  "acceptance_criteria": [
+    "Applications.html has no duplicate id attributes — each of resume-upload, cover-upload, app-link, status-select, interview-date is unique",
+    "application.js allows saving an application without uploading files (no early return on missing files)",
+    "Login.js handleLogin uses res.text() not res.json() for the /login fetch",
+    "Login.css .para-ll has color: #121417 (not white)",
+    "Login.css .container uses width: 100% not width: 1280px",
+    "./mvnw compile -q exits 0"
+  ],
+  "verification": [
+    "cd /home/simon/Downloads/JOB-TRRACKER-main && ./mvnw compile -q"
+  ],
+  "blocked_reason": null,
+  "findings": "Applications.html: all 5 duplicate id='para-upload' replaced with unique ids (resume-upload, cover-upload, app-link, status-select, interview-date) and matching label for= attributes updated. application.js: removed mandatory file guard; uploads are now optional — if no files selected, uploadRes defaults to {resumePath:'',coverLetterPath:''}; CSS class selectors (.Resume input, .cover input, .application-link input, .Status select, .Interview input) are untouched. Login.js: handleLogin now uses res.text() instead of res.json(). Login.css: .para-ll color changed from #FFFFFF to #121417; container, header, second-container, third-container, manage-account, Export, Export-pdf, password, Delete all use width:100% instead of fixed px widths; .container gets max-width:1280px + margin:0 auto; .rigth-head uses width:auto flex:1; @media(max-width:768px) block added. Java compilation passes (exit 0)."
+}
