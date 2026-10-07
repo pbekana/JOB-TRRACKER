@@ -12,6 +12,7 @@ public class CompUser {
     private String date;
     private String notes;
     private String imageUrl;
+    private String status;
 
     // --- Getters & Setters ---
     public Long getId() { return id; }
@@ -28,4 +29,7 @@ public class CompUser {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

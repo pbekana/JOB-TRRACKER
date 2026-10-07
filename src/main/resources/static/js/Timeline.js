@@ -98,29 +98,39 @@ const username=document.getElementById("username");
 
     profile_container.addEventListener("click",(e)=>{
   e.preventDefault();
- prof.hidden=false;
+  e.stopPropagation();
+  prof.hidden = !prof.hidden;
   });
 
-
+  document.addEventListener("click", (e) => {
+    if (!prof.contains(e.target) && e.target !== profile_container) {
+      prof.hidden = true;
+    }
+  });
 
 const section=document.getElementById("section");
 const nav_item=document.getElementById("setting");
-section.hidden=true;
-nav_item.addEventListener("click",(e)=>{
-e.preventDefault();
-section.hidden=false;
-});
+if (section && nav_item) {
+  section.hidden=true;
+  nav_item.addEventListener("click",(e)=>{
+    e.preventDefault();
+    section.hidden=false;
+  });
+}
 
 const rightButton_container=document.querySelector(".rightButton-container");
-rightButton_container.addEventListener("click",(e)=>{
-window.location.href = "/Applications";
-});
-
+if (rightButton_container) {
+  rightButton_container.addEventListener("click",(e)=>{
+    window.location.href = "/Applications";
+  });
+}
 
 const leftButton_container=document.querySelector(".leftButton-container");
-leftButton_container.addEventListener("click",(e)=>{
-window.location.href = "/Login";
-});
+if (leftButton_container) {
+  leftButton_container.addEventListener("click",(e)=>{
+    window.location.href = "/Login";
+  });
+}
   window.editProfile = function () {
       const name = prompt("Enter name");
       const bio = prompt("Enter new bio");

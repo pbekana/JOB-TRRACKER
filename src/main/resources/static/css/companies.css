@@ -6,7 +6,8 @@ padding: 0px;
 
 position: relative;
 width: 1280px;
-height: 852px;
+min-height: 100vh;
+height: auto;
 
 background: #FFFFFF;
 
@@ -185,7 +186,9 @@ align-items: flex-start;
 padding: 20px 160px;
 
 width: 1280px;
-height: 787px;
+min-height: 720px;
+height: auto;
+overflow-y: auto;
 
 order: 1;
 align-self: stretch;
@@ -532,3 +535,20 @@ body.dark-mode .container, body.dark-mode .top, body.dark-mode .thirdContainer {
 body.dark-mode .job-card { background-color:#0f3460; border-color:#1a4a80; color:#e0e0e0; }
 body.dark-mode #topic, body.dark-mode #app, body.dark-mode .para-dash, body.dark-mode .para-app, body.dark-mode .para-set { color:#e0e0e0; }
 body.dark-mode .sub-tab, body.dark-mode .sub-tab1, body.dark-mode .sub-tab3, body.dark-mode .sub-tab4, body.dark-mode .sub-tab5, body.dark-mode .sub-tab6 { background-color:#0f3460; color:#e0e0e0; }
+
+/* Card margin after title removed <br> spacers */
+.card {
+    margin-top: 16px;
+}
+
+/* Drag-and-drop highlight */
+.drag-over {
+    outline: 2px dashed #0D80F2;
+    background: rgba(13, 128, 242, 0.05);
+    border-radius: 8px;
+}
+
+/* Dragging card feedback */
+.job-card.dragging {
+    opacity: 0.5;
+}

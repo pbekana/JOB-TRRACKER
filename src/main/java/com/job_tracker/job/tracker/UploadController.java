@@ -18,26 +18,29 @@ public class UploadController {
 
     @PostMapping
     public ResponseEntity<?> uploadFiles(
-            @RequestParam("resume") MultipartFile resume,
-            @RequestParam("coverLetter") MultipartFile coverLetter) {
+            @RequestParam(value = "resume", required = false) MultipartFile resume,
+            @RequestParam(value = "coverLetter", required = false) MultipartFile coverLetter) {
 
         try {
             Path uploadPath = Paths.get(uploadDir);
-            if (!Files.exists(uploadPath)) Files.createDirectories(uploadPath);
+            Files.createDirectories(uploadPath);
 
-            String resumeFileName = System.currentTimeMillis() + "_" + resume.getOriginalFilename();
-            String coverFileName = System.currentTimeMillis() + "_" + coverLetter.getOriginalFilename();
+            String resumeFilePath = "";
+            String coverFilePath = "";
 
-            Path resumePath = uploadPath.resolve(resumeFileName);
-            Path coverPath = uploadPath.resolve(coverFileName);
+            if (resume != null && !resume.isEmpty()) {
+                String resumeFileName = System.currentTimeMillis() + "_" + resume.getOriginalFilename();
+                Files.copy(resume.getInputStream(), uploadPath.resolve(resumeFileName), StandardCopyOption.REPLACE_EXISTING);
+                resumeFilePath = "/uploads/" + resumeFileName;
+            }
 
-            Files.copy(resume.getInputStream(), resumePath, StandardCopyOption.REPLACE_EXISTING);
-            Files.copy(coverLetter.getInputStream(), coverPath, StandardCopyOption.REPLACE_EXISTING);
+            if (coverLetter != null && !coverLetter.isEmpty()) {
+                String coverFileName = System.currentTimeMillis() + "_" + coverLetter.getOriginalFilename();
+                Files.copy(coverLetter.getInputStream(), uploadPath.resolve(coverFileName), StandardCopyOption.REPLACE_EXISTING);
+                coverFilePath = "/uploads/" + coverFileName;
+            }
 
-            return ResponseEntity.ok(new UploadResponse(
-                    "/uploads/" + resumeFileName,
-                    "/uploads/" + coverFileName
-            ));
+            return ResponseEntity.ok(new UploadResponse(resumeFilePath, coverFilePath));
 
         } catch (IOException e) {
             e.printStackTrace();

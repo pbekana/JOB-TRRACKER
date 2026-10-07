@@ -48,8 +48,65 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function reattachEvents(column) {
     const cards = column.querySelectorAll(".job-card");
-    cards.forEach(enableDelete);
+    cards.forEach(card => {
+      enableDelete(card);
+      enableDragging(card);
+    });
   }
+
+  // --- Drag and Drop ---
+  let draggedCard = null;
+
+  function enableDragging(card) {
+    card.setAttribute("draggable", "true");
+    card.addEventListener("dragstart", (e) => {
+      draggedCard = card;
+      e.dataTransfer.setData("text/plain", card.dataset.id || "");
+      card.classList.add("dragging");
+    });
+    card.addEventListener("dragend", () => {
+      card.classList.remove("dragging");
+      draggedCard = null;
+    });
+  }
+
+  columns.forEach(column => {
+    column.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      column.classList.add("drag-over");
+    });
+    column.addEventListener("dragleave", (e) => {
+      if (!column.contains(e.relatedTarget)) {
+        column.classList.remove("drag-over");
+      }
+    });
+    column.addEventListener("drop", async (e) => {
+      e.preventDefault();
+      column.classList.remove("drag-over");
+      if (!draggedCard) return;
+
+      const addBtn = column.querySelector(".add-job-btn");
+      if (addBtn) {
+        column.insertBefore(draggedCard, addBtn);
+      } else {
+        column.appendChild(draggedCard);
+      }
+
+      const newStatus = column.dataset.status || "APPLIED";
+      const jobId = draggedCard.dataset.id;
+      if (jobId) {
+        try {
+          await fetch(`/api/jobs/${jobId}/status`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: newStatus })
+          });
+        } catch (err) {
+          console.error("Failed to update job status:", err);
+        }
+      }
+    });
+  });
 
   // --- Push existing HTML cards to backend if they have no ID ---
   async function pushExistingCards() {
@@ -145,6 +202,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let column;
         switch (job.status) {
           case "APPLIED": column = document.querySelector(".tabactive"); break;
+          case "PHONE_SCREEN": column = document.querySelector(".tabactive1"); break;
           case "INTERVIEWING": column = document.querySelector(".tabactive3"); break;
           case "OFFER": column = document.querySelector(".tabactive4"); break;
           case "REJECTED": column = document.querySelector(".tabactive5"); break;
@@ -165,6 +223,22 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- Initialize ---
-  //pushExistingCards().then(loadJobsFromBackend);
+  loadJobsFromBackend();
+
+  // --- Profile dropdown toggle ---
+  const profLink = document.querySelector(".prof");
+  const pprofile = document.querySelector(".pprofile");
+  if (profLink && pprofile) {
+    profLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      pprofile.hidden = !pprofile.hidden;
+    });
+    document.addEventListener("click", (e) => {
+      if (!pprofile.contains(e.target) && e.target !== profLink) {
+        pprofile.hidden = true;
+      }
+    });
+  }
 
 });

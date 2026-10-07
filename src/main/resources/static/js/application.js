@@ -137,4 +137,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Profile editing etc. remains unchanged
+
+  // Profile dropdown toggle
+  const profContainer = document.querySelector(".prof-container");
+  const containerProfile = document.getElementById("container-profile");
+  if (profContainer && containerProfile) {
+    profContainer.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      containerProfile.hidden = !containerProfile.hidden;
+    });
+    document.addEventListener("click", (e) => {
+      if (!containerProfile.contains(e.target) && e.target !== profContainer) {
+        containerProfile.hidden = true;
+      }
+    });
+  }
 });

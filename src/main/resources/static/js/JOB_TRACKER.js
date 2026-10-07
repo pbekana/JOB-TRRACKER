@@ -54,7 +54,14 @@ function setupQuickActions() {
 
         profile.addEventListener("click", (e) => {
             e.preventDefault();
-          container_profile.hidden=false;
+            e.stopPropagation();
+            container_profile.hidden = !container_profile.hidden;
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!container_profile.contains(e.target) && e.target !== profile) {
+                container_profile.hidden = true;
+            }
         });
 
     profBtn.addEventListener("click", () => {
