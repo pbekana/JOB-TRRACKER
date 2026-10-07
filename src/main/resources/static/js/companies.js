@@ -1,7 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-
   const columns = document.querySelectorAll(".tabactive, .tabactive1, .tabactive3, .tabactive4, .tabactive5, .tabactive6");
-
   // --- File chooser helper ---
   function selectFile() {
     return new Promise(resolve => {
@@ -12,14 +10,13 @@ window.addEventListener("DOMContentLoaded", () => {
       fileInput.onchange = () => resolve(fileInput.files[0] || null);
     });
   }
-
   // --- Create Job Card HTML ---
   function createJobCardHTML(id, title, date, notes, imgUrl) {
     return `
       <article class="job-card" data-id="${id ?? ''}" draggable="true">
         <div class="card-header">
           <img src="${imgUrl || '/images/default-company.png'}" alt="Company Logo">
-          <button class="delete-btn" title="Delete Job">✖</button>
+          <button class="delete-btn" title="Delete Job">&#x2716;</button>
         </div>
         <h3>${title}</h3>
         <p class="date">Added on ${date}</p>
@@ -27,7 +24,6 @@ window.addEventListener("DOMContentLoaded", () => {
       </article>
     `;
   }
-
   // --- Enable Delete ---
   function enableDelete(card) {
     const delBtn = card.querySelector(".delete-btn");
@@ -46,7 +42,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }, null);
     });
   }
-
   function reattachEvents(column) {
     const cards = column.querySelectorAll(".job-card");
     cards.forEach(card => {
@@ -54,10 +49,8 @@ window.addEventListener("DOMContentLoaded", () => {
       enableDragging(card);
     });
   }
-
   // --- Drag and Drop ---
   let draggedCard = null;
-
   function enableDragging(card) {
     card.setAttribute("draggable", "true");
     card.addEventListener("dragstart", (e) => {
@@ -70,7 +63,6 @@ window.addEventListener("DOMContentLoaded", () => {
       draggedCard = null;
     });
   }
-
   columns.forEach(column => {
     column.addEventListener("dragover", (e) => {
       e.preventDefault();
@@ -86,6 +78,10 @@ window.addEventListener("DOMContentLoaded", () => {
       column.classList.remove("drag-over");
       if (!draggedCard) return;
 
+      // Remember original position so we can revert on failure
+      const originalParent = draggedCard.parentElement;
+      const originalNextSibling = draggedCard.nextSibling;
+
       const addBtn = column.querySelector(".add-job-btn");
       if (addBtn) {
         column.insertBefore(draggedCard, addBtn);
@@ -95,25 +91,43 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const newStatus = column.dataset.status || "APPLIED";
       const jobId = draggedCard.dataset.id;
-      if (jobId) {
-        try {
-          await fetch(`/api/jobs/${jobId}/status`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status: newStatus })
-          });
-        } catch (err) {
-          console.error("Failed to update job status:", err);
+      if (!jobId) {
+        // Static/unsaved card — cannot persist, revert
+        if (originalNextSibling) {
+          originalParent.insertBefore(draggedCard, originalNextSibling);
+        } else {
+          originalParent.appendChild(draggedCard);
+        }
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/jobs/${jobId}/status`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (!res.ok) {
+          throw new Error("Server returned " + res.status);
+        }
+      } catch (err) {
+        console.error("Failed to update job status:", err);
+        // Revert card to original position
+        if (originalNextSibling) {
+          originalParent.insertBefore(draggedCard, originalNextSibling);
+        } else {
+          originalParent.appendChild(draggedCard);
+        }
+        if (typeof window.showToast === 'function') {
+          window.showToast("Could not save position. Please try again.", "error");
         }
       }
     });
   });
-
   // --- Add Job logic ---
   columns.forEach(column => {
     const addJobBtn = column.querySelector(".add-job-btn");
     if (!addJobBtn) return;
-
     addJobBtn.addEventListener("click", async () => {
       window.showPromptModal(
         [
@@ -125,8 +139,9 @@ window.addEventListener("DOMContentLoaded", () => {
           if (!title) return;
           const notes = vals[1] || "";
           const date = new Date().toLocaleDateString();
+          // Determine the column's status so new jobs land in the right column on reload
+          const columnStatus = column.dataset.status || "APPLIED";
           let imageUrl = "/images/default-company.png";
-
           const file = await selectFile();
           if (file) {
             const formData = new FormData();
@@ -139,12 +154,11 @@ window.addEventListener("DOMContentLoaded", () => {
               console.warn("Image upload failed, using default.", err);
             }
           }
-
           try {
             const res = await fetch("/api/jobs", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ title, notes, date, imageUrl })
+              body: JSON.stringify({ title, notes, date, imageUrl, status: columnStatus })
             });
             const newJob = await res.json();
             const newCardHTML = createJobCardHTML(newJob.id, newJob.title, newJob.date, newJob.notes, newJob.imageUrl);
@@ -159,39 +173,33 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     });
   });
-
   // --- Load jobs from backend ---
   async function loadJobsFromBackend() {
     try {
       const res = await fetch("/api/jobs");
       if (!res.ok) throw new Error("Failed to fetch jobs");
       const jobs = await res.json();
-
       columns.forEach(column => {
         const addBtn = column.querySelector(".add-job-btn");
         const subTab = column.querySelector("div[class^='sub-tab']");
-
         // Remove only existing job cards
         column.querySelectorAll(".job-card").forEach(card => card.remove());
-
         // Re-append Add button and sub-tab
         if (subTab && !column.contains(subTab)) column.prepend(subTab);
         if (addBtn && !column.contains(addBtn)) column.appendChild(addBtn);
       });
-
-      // Insert jobs into correct columns
+      // Insert jobs into correct columns based on persisted status
       jobs.forEach(job => {
         let column;
         switch (job.status) {
-          case "APPLIED": column = document.querySelector(".tabactive"); break;
+          case "APPLIED":      column = document.querySelector(".tabactive");  break;
           case "PHONE_SCREEN": column = document.querySelector(".tabactive1"); break;
           case "INTERVIEWING": column = document.querySelector(".tabactive3"); break;
-          case "OFFER": column = document.querySelector(".tabactive4"); break;
-          case "REJECTED": column = document.querySelector(".tabactive5"); break;
-          case "HIRED": column = document.querySelector(".tabactive6"); break;
-          default: column = document.querySelector(".tabactive"); break;
+          case "OFFER":        column = document.querySelector(".tabactive4"); break;
+          case "REJECTED":     column = document.querySelector(".tabactive5"); break;
+          case "HIRED":        column = document.querySelector(".tabactive6"); break;
+          default:             column = document.querySelector(".tabactive");  break;
         }
-
         if (!column) return;
         const addBtn = column.querySelector(".add-job-btn");
         const cardHTML = createJobCardHTML(job.id, job.title, job.date, job.notes, job.imageUrl);
@@ -202,14 +210,19 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         reattachEvents(column);
       });
-
     } catch (err) {
       console.error("Failed to load jobs:", err);
     }
   }
-
   // --- Initialize ---
   loadJobsFromBackend();
+
+  // --- Reload on bfcache restore (browser back/forward navigation) ---
+  window.addEventListener("pageshow", function(e) {
+    if (e.persisted) {
+      loadJobsFromBackend();
+    }
+  });
 
   // --- Profile dropdown toggle ---
   const profLink = document.querySelector(".prof");
@@ -226,5 +239,4 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
 });
