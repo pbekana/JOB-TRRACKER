@@ -1,0 +1,7 @@
+{
+  "task_id": "task-job-tracker-feature-update",
+  "task_description": "Fix the status dropdown bug, fix Login page CSS/JS, add Settings page with dark mode, style Contacts and Resources pages, and add real-time SSE notifications when a new job application is saved.",
+  "status": "completed",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004"],
+  "blocked_reason": null
+}
