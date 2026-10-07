@@ -1,0 +1,199 @@
+/* resources.css — design tokens match application.css */
+/* primary #0D80F2 | bg #F0F2F5 | text #121417 | muted #61758A | border #E6E8EB */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F0F2F5;
+  color: #121417;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  background: #ffffff;
+  border-bottom: 1px solid #E6E8EB;
+}
+
+.header-brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #121417;
+}
+
+.header-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+.header-nav a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #61758A;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.header-nav a:hover,
+.header-nav a.active {
+  color: #0D80F2;
+}
+
+.header-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ── Main ────────────────────────────────────────────────── */
+.resources-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.resources-heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #121417;
+  margin-bottom: 8px;
+}
+
+.resources-subheading {
+  font-size: 16px;
+  color: #61758A;
+  margin-bottom: 32px;
+}
+
+/* ── Resource Grid ───────────────────────────────────────── */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.resource-card {
+  background: #ffffff;
+  border: 1px solid #E6E8EB;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.2s;
+}
+
+.resource-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.resource-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #F0F2F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.resource-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #121417;
+}
+
+.resource-card-desc {
+  font-size: 14px;
+  color: #61758A;
+  flex: 1;
+}
+
+.resource-card-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #0D80F2;
+  color: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  align-self: flex-start;
+  transition: background 0.15s;
+}
+
+.resource-card-link:hover {
+  background: #0a6fd4;
+}
+
+/* ── Dark Mode ───────────────────────────────────────────── */
+body.dark-mode {
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+body.dark-mode header {
+  background: #16213e;
+  border-color: #2a2a4e;
+}
+
+body.dark-mode .header-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .header-nav a {
+  color: #a0a0c0;
+}
+
+body.dark-mode .header-nav a:hover,
+body.dark-mode .header-nav a.active {
+  color: #6ab3ff;
+}
+
+body.dark-mode .resource-card {
+  background: #16213e;
+  border-color: #2a2a4e;
+}
+
+body.dark-mode .resource-card-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .resource-card-desc {
+  color: #a0a0c0;
+}
+
+body.dark-mode .resources-heading {
+  color: #e0e0e0;
+}
+
+body.dark-mode .resource-card-icon {
+  background: #0d1b35;
+}

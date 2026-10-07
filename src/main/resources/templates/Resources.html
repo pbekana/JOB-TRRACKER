@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources — JobTracker</title>
+    <link rel="stylesheet" th:href="@{/css/resources.css}">
+    <script th:src="@{/js/darkmode.js}"></script>
+</head>
+<body>
+
+<header>
+    <div class="header-brand">
+        <img th:src="@{/images/886e770a-b523-4bc5-b893-a6c2272e507c.png}"
+             alt="JobTracker logo" class="header-logo">
+        <span class="header-title">JobTracker</span>
+    </div>
+    <nav class="header-nav">
+        <a th:href="@{/}">Dashboard</a>
+        <a th:href="@{/Applications}">Applications</a>
+        <a th:href="@{/Settings}">Settings</a>
+        <a th:href="@{/Contacts}">Contacts</a>
+    </nav>
+    <img th:src="@{/images/Depth 4, Frame 1.png}"
+         alt="Profile" class="header-avatar">
+</header>
+
+<main class="resources-main">
+    <h1 class="resources-heading">Resources</h1>
+    <p class="resources-subheading">Useful links and tools for your job search</p>
+
+    <div class="resources-grid">
+
+        <div class="resource-card">
+            <div class="resource-card-icon">💼</div>
+            <p class="resource-card-title">LinkedIn</p>
+            <p class="resource-card-desc">
+                Connect with professionals and explore job opportunities on LinkedIn.
+            </p>
+            <a href="https://linkedin.com/in/peterbekana" target="_blank"
+               class="resource-card-link">Visit LinkedIn</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-card-icon">🐙</div>
+            <p class="resource-card-title">GitHub</p>
+            <p class="resource-card-desc">
+                Browse open-source projects and explore my code repositories on GitHub.
+            </p>
+            <a href="https://github.com/peterbekana" target="_blank"
+               class="resource-card-link">Visit GitHub</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-card-icon">✍️</div>
+            <p class="resource-card-title">Medium Blog</p>
+            <p class="resource-card-desc">
+                Read articles on software engineering, career tips, and technology trends.
+            </p>
+            <a href="https://medium.com/@peterbekana" target="_blank"
+               class="resource-card-link">Read Blog</a>
+        </div>
+
+    </div>
+</main>
+
+<script th:src="@{/js/notifications.js}"></script>
+</body>
+</html>
