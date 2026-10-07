@@ -33,16 +33,17 @@ window.addEventListener("DOMContentLoaded", () => {
     const delBtn = card.querySelector(".delete-btn");
     if (!delBtn) return;
     delBtn.addEventListener("click", async () => {
-      if (!confirm("Delete this job?")) return;
-      const jobId = card.getAttribute("data-id");
-      if (jobId) {
-        try {
-          await fetch(`/api/jobs/${jobId}`, { method: "DELETE" });
-        } catch (err) {
-          console.error("Failed to delete job from backend:", err);
+      window.showConfirm("Delete this job? This cannot be undone.", async function() {
+        const jobId = card.getAttribute("data-id");
+        if (jobId) {
+          try {
+            await fetch(`/api/jobs/${jobId}`, { method: "DELETE" });
+          } catch (err) {
+            console.error("Failed to delete job from backend:", err);
+          }
         }
-      }
-      card.remove();
+        card.remove();
+      }, null);
     });
   }
 
@@ -142,39 +143,48 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!addJobBtn) return;
 
     addJobBtn.addEventListener("click", async () => {
-      const title = prompt("Enter Job Title:");
-      if (!title) return;
-      const notes = prompt("Enter Notes:") || "";
-      const date = new Date().toLocaleDateString();
-      let imageUrl = "/images/default-company.png";
+      window.showPromptModal(
+        [
+          { label: 'Job Title', placeholder: 'e.g. Software Engineer', required: true },
+          { label: 'Notes',     placeholder: 'Optional notes',          required: false }
+        ],
+        async function(vals) {
+          const title = vals[0];
+          if (!title) return;
+          const notes = vals[1] || "";
+          const date = new Date().toLocaleDateString();
+          let imageUrl = "/images/default-company.png";
 
-      const file = await selectFile();
-      if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
-        try {
-          const uploadRes = await fetch("/api/images/upload", { method: "POST", body: formData });
-          const result = await uploadRes.json();
-          imageUrl = result.path || imageUrl;
-        } catch (err) {
-          console.warn("Image upload failed, using default.", err);
-        }
-      }
+          const file = await selectFile();
+          if (file) {
+            const formData = new FormData();
+            formData.append("file", file);
+            try {
+              const uploadRes = await fetch("/api/images/upload", { method: "POST", body: formData });
+              const result = await uploadRes.json();
+              imageUrl = result.path || imageUrl;
+            } catch (err) {
+              console.warn("Image upload failed, using default.", err);
+            }
+          }
 
-      try {
-        const res = await fetch("/api/jobs", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title, notes, date, imageUrl })
-        });
-        const newJob = await res.json();
-        const newCardHTML = createJobCardHTML(newJob.id, newJob.title, newJob.date, newJob.notes, newJob.imageUrl);
-        addJobBtn.insertAdjacentHTML("beforebegin", newCardHTML);
-        reattachEvents(column);
-      } catch (err) {
-        console.error("Failed to save job:", err);
-        alert("Could not save job. Please try again.");
-      }
+          try {
+            const res = await fetch("/api/jobs", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ title, notes, date, imageUrl })
+            });
+            const newJob = await res.json();
+            const newCardHTML = createJobCardHTML(newJob.id, newJob.title, newJob.date, newJob.notes, newJob.imageUrl);
+            addJobBtn.insertAdjacentHTML("beforebegin", newCardHTML);
+            reattachEvents(column);
+          } catch (err) {
+            console.error("Failed to save job:", err);
+            window.showToast("Could not save job. Please try again.", "error");
+          }
+        },
+        null
+      );
     });
   });
 

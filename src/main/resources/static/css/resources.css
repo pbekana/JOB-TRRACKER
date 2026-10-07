@@ -154,46 +154,47 @@ header {
 }
 
 /* ── Dark Mode ───────────────────────────────────────────── */
-body.dark-mode {
+/* ── Dark Mode ───────────────────────────────────────────── */
+html.dark-mode body, body.dark-mode {
   background: #1a1a2e;
   color: #e0e0e0;
 }
 
-body.dark-mode header {
+html.dark-mode header, body.dark-mode header {
   background: #16213e;
   border-color: #2a2a4e;
 }
 
-body.dark-mode .header-title {
+html.dark-mode .header-title, body.dark-mode .header-title {
   color: #e0e0e0;
 }
 
-body.dark-mode .header-nav a {
+html.dark-mode .header-nav a, body.dark-mode .header-nav a {
   color: #a0a0c0;
 }
 
-body.dark-mode .header-nav a:hover,
-body.dark-mode .header-nav a.active {
+html.dark-mode .header-nav a:hover, body.dark-mode .header-nav a:hover,
+html.dark-mode .header-nav a.active, body.dark-mode .header-nav a.active {
   color: #6ab3ff;
 }
 
-body.dark-mode .resource-card {
+html.dark-mode .resource-card, body.dark-mode .resource-card {
   background: #16213e;
   border-color: #2a2a4e;
 }
 
-body.dark-mode .resource-card-title {
+html.dark-mode .resource-card-title, body.dark-mode .resource-card-title {
   color: #e0e0e0;
 }
 
-body.dark-mode .resource-card-desc {
+html.dark-mode .resource-card-desc, body.dark-mode .resource-card-desc {
   color: #a0a0c0;
 }
 
-body.dark-mode .resources-heading {
+html.dark-mode .resources-heading, body.dark-mode .resources-heading {
   color: #e0e0e0;
 }
 
-body.dark-mode .resource-card-icon {
+html.dark-mode .resource-card-icon, body.dark-mode .resource-card-icon {
   background: #0d1b35;
 }

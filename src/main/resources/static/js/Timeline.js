@@ -132,18 +132,21 @@ if (leftButton_container) {
   });
 }
   window.editProfile = function () {
-      const name = prompt("Enter name");
-      const bio = prompt("Enter new bio");
-      const imgUrl = prompt("Enter image URL");
-
-      if (name) {
-        username.textContent = name;
-      }
-      if (bio) {
-        userBio.textContent = bio;
-      }
-      if (imgUrl) {
-        img.src = imgUrl;
-      }
-    };
+      window.showPromptModal(
+        [
+          { label: 'Name',      placeholder: 'e.g. John Doe' },
+          { label: 'Bio',       placeholder: 'e.g. Web Developer' },
+          { label: 'Image URL', placeholder: 'https://...' }
+        ],
+        function(vals) {
+          const username = document.getElementById("username");
+          const userBio  = document.getElementById("userBio");
+          const img      = document.getElementById("img");
+          if (vals[0] && username) username.textContent = vals[0];
+          if (vals[1] && userBio)  userBio.textContent  = vals[1];
+          if (vals[2] && img)      img.src              = vals[2];
+        },
+        null
+      );
+  };
 });

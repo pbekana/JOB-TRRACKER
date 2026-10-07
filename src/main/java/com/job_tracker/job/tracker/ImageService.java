@@ -12,7 +12,7 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
-    @Value("${upload.dir}")
+    @Value("${upload.dir:uploads}")
     private String uploadDir;
 
     public ImageService(ImageRepository imageRepository) {

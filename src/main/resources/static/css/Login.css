@@ -1328,7 +1328,18 @@ order: 0;
 }
 
 /* ===== Dark Mode ===== */
-body.dark-mode { background-color:#1a1a2e; color:#e0e0e0; }
-body.dark-mode .container, body.dark-mode header, body.dark-mode .third-container { background-color:#16213e; border-color:#2a2a4e; }
-body.dark-mode .para, body.dark-mode .para-account, body.dark-mode .para-cloud, body.dark-mode .export-para, body.dark-mode .password-para, body.dark-mode .delete-para { color:#e0e0e0; }
-body.dark-mode .cloud-container, body.dark-mode .Export, body.dark-mode .Export-pdf, body.dark-mode .password, body.dark-mode .Delete { background-color:#0f3460; }
+html.dark-mode body, body.dark-mode { background-color:#1a1a2e; color:#e0e0e0; }
+html.dark-mode .container, body.dark-mode .container,
+html.dark-mode header, body.dark-mode header,
+html.dark-mode .third-container, body.dark-mode .third-container { background-color:#16213e; border-color:#2a2a4e; }
+html.dark-mode .para, body.dark-mode .para,
+html.dark-mode .para-account, body.dark-mode .para-account,
+html.dark-mode .para-cloud, body.dark-mode .para-cloud,
+html.dark-mode .export-para, body.dark-mode .export-para,
+html.dark-mode .password-para, body.dark-mode .password-para,
+html.dark-mode .delete-para, body.dark-mode .delete-para { color:#e0e0e0; }
+html.dark-mode .cloud-container, body.dark-mode .cloud-container,
+html.dark-mode .Export, body.dark-mode .Export,
+html.dark-mode .Export-pdf, body.dark-mode .Export-pdf,
+html.dark-mode .password, body.dark-mode .password,
+html.dark-mode .Delete, body.dark-mode .Delete { background-color:#0f3460; }

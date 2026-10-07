@@ -219,47 +219,48 @@ input:checked + .slider::before {
 }
 
 /* ---- Dark Mode Overrides ---- */
-body.dark-mode {
+/* ---- Dark Mode Overrides ---- */
+html.dark-mode body, body.dark-mode {
     background-color: #1a1a2e;
     color: #e0e0e0;
 }
 
-body.dark-mode .settings-header {
+html.dark-mode .settings-header, body.dark-mode .settings-header {
     background-color: #16213e;
     border-color: #2a2a4e;
 }
 
-body.dark-mode .settings-header .header-brand,
-body.dark-mode .settings-main h1 {
+html.dark-mode .settings-header .header-brand, body.dark-mode .settings-header .header-brand,
+html.dark-mode .settings-main h1, body.dark-mode .settings-main h1 {
     color: #e0e0e0;
 }
 
-body.dark-mode .settings-section {
+html.dark-mode .settings-section, body.dark-mode .settings-section {
     background-color: #16213e;
     border-color: #2a2a4e;
 }
 
-body.dark-mode .settings-section h2,
-body.dark-mode .settings-row .settings-label-group strong {
+html.dark-mode .settings-section h2, body.dark-mode .settings-section h2,
+html.dark-mode .settings-row .settings-label-group strong, body.dark-mode .settings-row .settings-label-group strong {
     color: #e0e0e0;
 }
 
-body.dark-mode .settings-row {
+html.dark-mode .settings-row, body.dark-mode .settings-row {
     border-color: #2a2a4e;
 }
 
-body.dark-mode .settings-row label,
-body.dark-mode .settings-row span,
-body.dark-mode .settings-row .settings-label-group {
+html.dark-mode .settings-row label, body.dark-mode .settings-row label,
+html.dark-mode .settings-row span, body.dark-mode .settings-row span,
+html.dark-mode .settings-row .settings-label-group, body.dark-mode .settings-row .settings-label-group {
     color: #b0b0b0;
 }
 
-body.dark-mode .settings-row select {
+html.dark-mode .settings-row select, body.dark-mode .settings-row select {
     background: #0f3460;
     border-color: #1a4a80;
     color: #e0e0e0;
 }
 
-body.dark-mode .slider {
+html.dark-mode .slider, body.dark-mode .slider {
     background-color: #2a2a4e;
 }

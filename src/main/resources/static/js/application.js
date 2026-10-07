@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   saveBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 
+    const setStatus = (text, color) => {
+      if (statusMessage) {
+        statusMessage.textContent = text;
+        statusMessage.style.color = color;
+      }
+    };
+
     // Select files correctly using container classes
     const resumeFile = document.querySelector(".Resume input").files[0];
     const coverFile = document.querySelector(".cover input").files[0];
@@ -22,11 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const res = await fetch("/api/uploads", { method: "POST", body: formData });
+        if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(errText || `HTTP ${res.status}`);
+        }
         uploadRes = await res.json();
       } catch (err) {
         console.error("File upload error:", err);
-        statusMessage.textContent = "❌ File upload failed!";
-        statusMessage.style.color = "red";
+        setStatus("❌ File upload failed!", "red");
         return;
       }
     } else {
@@ -47,8 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (!applicationData.company || !applicationData.jobTitle) {
-      statusMessage.textContent = "⚠️ Please enter at least Company Name and Job Title.";
-      statusMessage.style.color = "red";
+      setStatus("⚠️ Please enter at least Company Name and Job Title.", "red");
       return;
     }
 
@@ -59,12 +68,15 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(applicationData)
       });
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(errText || `HTTP ${res.status}`);
+      }
       await res.json();
 
-      statusMessage.textContent = "✅ Application saved!";
-      statusMessage.style.color = "green";
+      setStatus("✅ Application saved!", "green");
       if (typeof window.showToast === 'function') {
-        window.showToast('Application saved: ' + applicationData.jobTitle + ' at ' + applicationData.company);
+        window.showToast('Application saved: ' + applicationData.jobTitle + ' at ' + applicationData.company, 'success');
       }
 
       // Reset form fields
@@ -81,8 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (err) {
       console.error("Error saving application:", err);
-      statusMessage.textContent = "❌ Failed to save application!";
-      statusMessage.style.color = "red";
+      setStatus("❌ Failed to save application!", "red");
     }
   });
 
@@ -131,8 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch(err => {
         console.error("Error fetching applications:", err);
-        statusMessage.textContent = "❌ Failed to load data.";
-        statusMessage.style.color = "red";
+        if (statusMessage) {
+          statusMessage.textContent = "❌ Failed to load data.";
+          statusMessage.style.color = "red";
+        }
       });
   });
 

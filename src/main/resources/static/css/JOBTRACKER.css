@@ -1083,13 +1083,78 @@ position:absolute;
 }
 
 /* ===== Dark Mode ===== */
-body.dark-mode { background-color: #1a1a2e; color: #e0e0e0; }
-body.dark-mode header { background-color: #16213e; border-color: #2a2a4e; }
-body.dark-mode .insideApp, body.dark-mode .applied, body.dark-mode .interviewing, body.dark-mode .offer, body.dark-mode .rejected { background-color: #0f3460; border-color: #1a4a80; color: #e0e0e0; }
-body.dark-mode .Title, body.dark-mode .para-dash, body.dark-mode .para-app, body.dark-mode .para-comp { color: #e0e0e0; }
+html.dark-mode body, body.dark-mode { background-color: #1a1a2e; color: #e0e0e0; }
+html.dark-mode header, body.dark-mode header { background-color: #16213e; border-color: #2a2a4e; }
+html.dark-mode .insideApp, body.dark-mode .insideApp,
+html.dark-mode .applied, body.dark-mode .applied,
+html.dark-mode .interviewing, body.dark-mode .interviewing,
+html.dark-mode .offer, body.dark-mode .offer,
+html.dark-mode .rejected, body.dark-mode .rejected { background-color: #0f3460; border-color: #1a4a80; color: #e0e0e0; }
+html.dark-mode .Title, body.dark-mode .Title,
+html.dark-mode .para-dash, body.dark-mode .para-dash,
+html.dark-mode .para-app, body.dark-mode .para-app,
+html.dark-mode .para-comp, body.dark-mode .para-comp { color: #e0e0e0; }
 
 /* ===== Toast ===== */
 #toast-container { position:fixed; top:20px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:8px; }
-.sse-toast { background:#121417; color:#fff; padding:12px 20px; border-radius:8px; font-family:'Inter',sans-serif; font-size:14px; box-shadow:0 4px 12px rgba(0,0,0,.25); opacity:0; transform:translateX(40px); transition:opacity .3s,transform .3s; max-width:360px; pointer-events:none; }
+.sse-toast { background:#121417; color:#fff; padding:12px 20px; border-radius:8px; font-family:'Inter',sans-serif; font-size:14px; box-shadow:0 4px 12px rgba(0,0,0,.25); opacity:0; transform:translateX(40px); transition:opacity .3s,transform .3s; max-width:360px; display:flex; align-items:center; gap:10px; }
 .sse-toast--visible { opacity:1; transform:translateX(0); }
-body.dark-mode .sse-toast { background:#0D80F2; }
+html.dark-mode .sse-toast, body.dark-mode .sse-toast { background:#0D80F2; }
+
+/* === Typed Toast Variants === */
+.sse-toast--success { background:#16a34a; }
+.sse-toast--error   { background:#dc2626; }
+.sse-toast--warning { background:#ea580c; }
+.sse-toast--info    { background:#0d80f2; }
+.sse-toast-dismiss {
+    background: transparent; border: none; color: #fff; font-size: 18px;
+    cursor: pointer; padding: 0 0 0 6px; line-height: 1; flex-shrink: 0;
+    opacity: 0.8;
+}
+.sse-toast-dismiss:hover { opacity: 1; }
+
+/* === Confirm / Prompt Modal === */
+.jt-overlay {
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,0.45);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.2s;
+}
+.jt-modal {
+    background: #fff; border-radius: 10px; padding: 28px 32px;
+    min-width: 320px; max-width: 480px; width: 90%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    display: flex; flex-direction: column; gap: 16px;
+}
+.jt-modal p { font-size: 15px; color: #121417; line-height: 1.5; margin: 0; }
+.jt-modal-field { display: flex; flex-direction: column; gap: 6px; }
+.jt-modal-field label { font-size: 13px; font-weight: 600; color: #61758a; display: block; }
+.jt-modal input[type="text"],
+.jt-modal input[type="password"] {
+    width: 100%; padding: 8px 12px; border: 1px solid #dbe0e6;
+    border-radius: 6px; font-size: 14px; outline: none;
+    box-sizing: border-box;
+}
+.jt-modal input:focus { border-color: #0d80f2; }
+.jt-modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
+.jt-modal-actions button {
+    padding: 8px 22px; border: none; border-radius: 6px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.jt-btn-confirm { background: #0d80f2; color: #fff; }
+.jt-btn-confirm:hover { background: #0b6ed0; }
+.jt-btn-cancel  { background: #f0f2f5; color: #121417; }
+.jt-btn-cancel:hover  { background: #dbe0e6; }
+
+/* Dark mode overrides for modals */
+html.dark-mode .jt-modal, body.dark-mode .jt-modal { background: #16213e; }
+html.dark-mode .jt-modal p, body.dark-mode .jt-modal p { color: #e0e0e0; }
+html.dark-mode .jt-modal-field label, body.dark-mode .jt-modal-field label { color: #b0b0b0; }
+html.dark-mode .jt-modal input[type="text"],
+html.dark-mode .jt-modal input[type="password"],
+body.dark-mode .jt-modal input[type="text"],
+body.dark-mode .jt-modal input[type="password"] {
+    background: #0f3460; border-color: #1a4a80; color: #e0e0e0;
+}
+html.dark-mode .jt-btn-cancel, body.dark-mode .jt-btn-cancel { background: #0f3460; color: #e0e0e0; }
+

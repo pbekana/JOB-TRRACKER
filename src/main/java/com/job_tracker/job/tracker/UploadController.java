@@ -13,7 +13,7 @@ import java.nio.file.*;
 @CrossOrigin("*")
 public class UploadController {
 
-    @Value("${upload.dir}")
+    @Value("${upload.dir:uploads}")
     private String uploadDir;
 
     @PostMapping

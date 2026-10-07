@@ -63,8 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = emailInput.value.trim();
       const pass = passInput.value;
 
-      if (!email) return alert("Please enter an email.");
-      if (pass.length <= 6) return alert("Password must be more than 6 characters.");
+      if (!email) {
+        window.showToast("Please enter an email.", "warning");
+        return;
+      }
+      if (pass.length <= 6) {
+        window.showToast("Password must be more than 6 characters.", "warning");
+        return;
+      }
 
       fetch("/signup", {
         method: "POST",
@@ -78,14 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return res.text();
       })
       .then(msg => {
-        alert("✅ Signup successful");
+        window.showToast("Signup successful", "success");
         form.reset();
         currentUserEmail = email;
         [cloud_container, Export, Export_pdf, data_container, security_container, password, Delete].forEach(el => {
           if (el) el.classList.remove("hidden");
         });
       })
-      .catch(err => alert("❌ Error: " + err.message));
+      .catch(err => window.showToast("Error: " + err.message, "error"));
     });
 
     demo.appendChild(form);
@@ -112,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const passInput = document.getElementById("sid");
 
     if (!emailInput || !passInput) {
-      alert("Please signup first!");
+      window.showToast("Please signup first!", "warning");
       createSignupForm();
       return;
     }
@@ -129,20 +135,23 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(res => res.ok ? res.text() : Promise.reject("Invalid credentials"))
     .then(data => {
-      alert("✅ Login successful");
+      window.showToast("Login successful", "success");
       currentUserEmail = email;
       [cloud_container, Export, Export_pdf, data_container, security_container, password, Delete].forEach(el => {
         if (el) el.classList.remove("hidden");
       });
     })
-    .catch(err => alert("❌ " + err));
+    .catch(err => window.showToast("" + err, "error"));
   }
 
   // ---------------- Cloud toggle ----------------
   const cloudToggle = document.querySelector(".cloud-container input[type='checkbox']");
   if (cloudToggle) {
     cloudToggle.addEventListener("change", () => {
-      alert(cloudToggle.checked ? "☁️ Cloud Sync Enabled (demo only)" : "⛔ Cloud Sync Disabled");
+      window.showToast(
+        cloudToggle.checked ? "Cloud Sync Enabled (demo only)" : "Cloud Sync Disabled",
+        "info"
+      );
     });
   }
 
@@ -151,7 +160,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (exportCsvBtn) {
     exportCsvBtn.addEventListener("click", async (e) => {
       e.preventDefault();
-      if (!currentUserEmail) return alert("No user logged in.");
+      if (!currentUserEmail) {
+        window.showToast("No user logged in.", "warning");
+        return;
+      }
 
       const res = await fetch(`/user/${encodeURIComponent(currentUserEmail)}`);
       const data = await res.json();
@@ -173,7 +185,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (exportPdfBtn) {
     exportPdfBtn.addEventListener("click", async (e) => {
       e.preventDefault();
-      if (!currentUserEmail) return alert("No user logged in.");
+      if (!currentUserEmail) {
+        window.showToast("No user logged in.", "warning");
+        return;
+      }
 
       const res = await fetch(`/user/${encodeURIComponent(currentUserEmail)}`);
       const data = await res.json();
@@ -191,50 +206,68 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------- Change password ----------------
   const changePassBtn = document.querySelector(".password-btnContainer button");
   if (changePassBtn) {
-    changePassBtn.addEventListener("click", async (e) => {
+    changePassBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      if (!currentUserEmail) return alert("No user logged in.");
-
-      const newPass = prompt("Enter your new password:");
-      if (!newPass) return;
-
-      const res = await fetch(`/user/${encodeURIComponent(currentUserEmail)}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ password: newPass })
-      });
-
-      if (res.ok) {
-        alert("🔑 Password updated!");
-      } else {
-        alert("❌ Failed to update password.");
+      if (!currentUserEmail) {
+        window.showToast("No user logged in.", "warning");
+        return;
       }
+
+      window.showPromptModal(
+        [{ label: 'New Password', type: 'password', placeholder: 'Enter new password', required: true }],
+        async function(vals) {
+          const newPass = vals[0];
+          if (!newPass) return;
+
+          const res = await fetch(`/user/${encodeURIComponent(currentUserEmail)}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ password: newPass })
+          });
+
+          if (res.ok) {
+            window.showToast("Password updated!", "success");
+          } else {
+            window.showToast("Failed to update password.", "error");
+          }
+        },
+        null
+      );
     });
   }
 
   // ---------------- Delete account ----------------
   const deleteBtn = document.querySelector(".delete-btnContainer button");
   if (deleteBtn) {
-    deleteBtn.addEventListener("click", async (e) => {
+    deleteBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      if (!currentUserEmail) return alert("No user logged in.");
-      if (!confirm("⚠️ Are you sure you want to delete your account?")) return;
-
-      const res = await fetch(`/user/${encodeURIComponent(currentUserEmail)}`, {
-        method: "DELETE"
-      });
-
-      if (res.ok) {
-        alert("🗑️ Account deleted!");
-        currentUserEmail = null;
-        location.reload();
-      } else {
-        alert("❌ Failed to delete account.");
+      if (!currentUserEmail) {
+        window.showToast("No user logged in.", "warning");
+        return;
       }
+
+      window.showConfirm(
+        "Are you sure you want to delete your account? This cannot be undone.",
+        async function() {
+          const res = await fetch(`/user/${encodeURIComponent(currentUserEmail)}`, {
+            method: "DELETE"
+          });
+
+          if (res.ok) {
+            window.showToast("Account deleted!", "success");
+            currentUserEmail = null;
+            location.reload();
+          } else {
+            window.showToast("Failed to delete account.", "error");
+          }
+        },
+        null
+      );
     });
   }
+
  // ---------------- Google Login ----------------
 window.onload = function () {
   google.accounts.id.initialize({

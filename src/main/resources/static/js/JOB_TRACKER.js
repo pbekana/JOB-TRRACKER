@@ -65,12 +65,18 @@ function setupQuickActions() {
         });
 
     profBtn.addEventListener("click", () => {
-        const name = prompt("Enter name");
-        const bio = prompt("Enter bio");
-        const imgUrl = prompt("Enter image URL");
-        if(name) username.textContent = name;
-        if(bio) userBio.textContent = bio;
-        if(imgUrl) document.getElementById("img").src = imgUrl;
+        window.showPromptModal(
+            [
+                { label: 'Name',      placeholder: 'John Doe' },
+                { label: 'Bio',       placeholder: 'e.g. Web Developer' },
+                { label: 'Image URL', placeholder: 'https://...' }
+            ],
+            function(vals) {
+                if (vals[0]) username.textContent = vals[0];
+                if (vals[1]) userBio.textContent = vals[1];
+                if (vals[2]) document.getElementById("img").src = vals[2];
+            }
+        );
     });
 
     // Notifications button
@@ -88,7 +94,7 @@ function setupQuickActions() {
 
     function showNotification() {
         const notification = new Notification("New Message", { body: "You have a notification from your app!" });
-        notification.onclick = () => { window.focus(); alert("Notification clicked"); };
+        notification.onclick = () => { window.focus(); window.showToast('Notification clicked', 'info'); };
     }
 }
 

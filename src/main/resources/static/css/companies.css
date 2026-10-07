@@ -530,11 +530,22 @@ position: absolute;
     background: #e6e8eb;
 }
 /* ===== Dark Mode ===== */
-body.dark-mode { background-color:#1a1a2e; color:#e0e0e0; }
-body.dark-mode .container, body.dark-mode .top, body.dark-mode .thirdContainer { background-color:#16213e; border-color:#2a2a4e; }
-body.dark-mode .job-card { background-color:#0f3460; border-color:#1a4a80; color:#e0e0e0; }
-body.dark-mode #topic, body.dark-mode #app, body.dark-mode .para-dash, body.dark-mode .para-app, body.dark-mode .para-set { color:#e0e0e0; }
-body.dark-mode .sub-tab, body.dark-mode .sub-tab1, body.dark-mode .sub-tab3, body.dark-mode .sub-tab4, body.dark-mode .sub-tab5, body.dark-mode .sub-tab6 { background-color:#0f3460; color:#e0e0e0; }
+html.dark-mode body, body.dark-mode { background-color:#1a1a2e; color:#e0e0e0; }
+html.dark-mode .container, body.dark-mode .container,
+html.dark-mode .top, body.dark-mode .top,
+html.dark-mode .thirdContainer, body.dark-mode .thirdContainer { background-color:#16213e; border-color:#2a2a4e; }
+html.dark-mode .job-card, body.dark-mode .job-card { background-color:#0f3460; border-color:#1a4a80; color:#e0e0e0; }
+html.dark-mode #topic, body.dark-mode #topic,
+html.dark-mode #app, body.dark-mode #app,
+html.dark-mode .para-dash, body.dark-mode .para-dash,
+html.dark-mode .para-app, body.dark-mode .para-app,
+html.dark-mode .para-set, body.dark-mode .para-set { color:#e0e0e0; }
+html.dark-mode .sub-tab, body.dark-mode .sub-tab,
+html.dark-mode .sub-tab1, body.dark-mode .sub-tab1,
+html.dark-mode .sub-tab3, body.dark-mode .sub-tab3,
+html.dark-mode .sub-tab4, body.dark-mode .sub-tab4,
+html.dark-mode .sub-tab5, body.dark-mode .sub-tab5,
+html.dark-mode .sub-tab6, body.dark-mode .sub-tab6 { background-color:#0f3460; color:#e0e0e0; }
 
 /* Card margin after title removed <br> spacers */
 .card {

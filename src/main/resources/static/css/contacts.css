@@ -145,40 +145,41 @@ header {
 }
 
 /* ── Dark Mode ───────────────────────────────────────────── */
-body.dark-mode {
+/* ── Dark Mode ───────────────────────────────────────────── */
+html.dark-mode body, body.dark-mode {
   background: #1a1a2e;
   color: #e0e0e0;
 }
 
-body.dark-mode header {
+html.dark-mode header, body.dark-mode header {
   background: #16213e;
   border-color: #2a2a4e;
 }
 
-body.dark-mode .header-title {
+html.dark-mode .header-title, body.dark-mode .header-title {
   color: #e0e0e0;
 }
 
-body.dark-mode .header-nav a {
+html.dark-mode .header-nav a, body.dark-mode .header-nav a {
   color: #a0a0c0;
 }
 
-body.dark-mode .header-nav a:hover,
-body.dark-mode .header-nav a.active {
+html.dark-mode .header-nav a:hover, body.dark-mode .header-nav a:hover,
+html.dark-mode .header-nav a.active, body.dark-mode .header-nav a.active {
   color: #6ab3ff;
 }
 
-body.dark-mode .contact-card {
+html.dark-mode .contact-card, body.dark-mode .contact-card {
   background: #16213e;
   border-color: #2a2a4e;
 }
 
-body.dark-mode .contact-name,
-body.dark-mode .contact-row {
+html.dark-mode .contact-name, body.dark-mode .contact-name,
+html.dark-mode .contact-row, body.dark-mode .contact-row {
   color: #e0e0e0;
 }
 
-body.dark-mode .contact-title,
-body.dark-mode .contact-row .contact-label {
+html.dark-mode .contact-title, body.dark-mode .contact-title,
+html.dark-mode .contact-row .contact-label, body.dark-mode .contact-row .contact-label {
   color: #a0a0c0;
 }

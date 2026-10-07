@@ -112,10 +112,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Live dark mode toggle
     darkModeToggle.addEventListener('change', function () {
         if (this.checked) {
-            document.body.classList.add('dark-mode');
+            document.documentElement.classList.add('dark-mode');
             localStorage.setItem('darkMode', 'true');
         } else {
-            document.body.classList.remove('dark-mode');
+            document.documentElement.classList.remove('dark-mode');
             localStorage.setItem('darkMode', 'false');
         }
     });
