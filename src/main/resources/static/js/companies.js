@@ -213,7 +213,11 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!column) return;
         const addBtn = column.querySelector(".add-job-btn");
         const cardHTML = createJobCardHTML(job.id, job.title, job.date, job.notes, job.imageUrl);
-        addBtn.insertAdjacentHTML("beforebegin", cardHTML);
+        if (addBtn) {
+          addBtn.insertAdjacentHTML("beforebegin", cardHTML);
+        } else {
+          column.insertAdjacentHTML("beforeend", cardHTML);
+        }
         reattachEvents(column);
       });
 

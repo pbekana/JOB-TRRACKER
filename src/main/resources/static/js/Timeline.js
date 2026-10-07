@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const username=document.getElementById("username");
         const userJob=document.getElementById("userJob");
         const submit_btn=document.getElementById("submit-btn");
-        const profile_container=document.querySelector(".img-prof");
+        const profile_container=document.querySelector(".avatar");
         const prof=document.querySelector(".prof");
 
     profile_container.addEventListener("click",(e)=>{
