@@ -1,0 +1,72 @@
+INTEGRATION VERIFICATION EVIDENCE
+===================================
+Date: Iteration 1
+Build command: cd /home/simon/Downloads/JOB-TRRACKER-main && JAVA_HOME=/home/simon/.jdks/openjdk-27 ./mvnw compile -q
+
+BUILD RESULT
+------------
+Exit code: 0
+Warnings: Only JVM/Maven-internal deprecation warnings (sun.misc.Unsafe, final field mutation via sisu). No project source errors.
+
+CROSS-FEATURE SEAM CHECKS
+--------------------------
+
+(a) notifications.js loaded in all required templates:
+    - Applications.html: YES
+    - Companies.html:    YES
+    - Contacts.html:     YES
+    - index.html:        YES
+    - Resources.html:    YES
+    - Settings.html:     YES
+    - Timeline.html:     YES
+    PASS
+
+(b) darkmode.js loaded in all required templates:
+    - Applications.html: YES
+    - Companies.html:    YES
+    - Contacts.html:     YES
+    - index.html:        YES
+    - Login.html:        YES
+    - Resources.html:    YES
+    - Settings.html:     YES
+    - Timeline.html:     YES
+    PASS
+
+(c) Settings.html exists + IndexController has /Settings mapping:
+    - Settings.html at src/main/resources/templates/Settings.html: EXISTS
+    - IndexController.java @GetMapping("/Settings") at line 51: EXISTS
+    PASS
+
+(d) AppUserController.java correctly injects NotificationService:
+    - private final AppRepository repository; (line 14)
+    - private final NotificationService notificationService; (line 15)
+    - Constructor: public AppUserController(AppRepository repository, NotificationService notificationService) (line 17)
+    PASS
+
+(e) application.js optional-upload logic consistent with FEAT-001 form IDs:
+    - resumeFile from .Resume input (CSS class selector, unchanged): YES
+    - coverFile from .cover input (CSS class selector, unchanged): YES
+    - Guard removed; if (resumeFile || coverFile) wraps the upload block: YES
+    - Fallback uploadRes = { resumePath: '', coverLetterPath: '' }: YES
+    - window.showToast called after '✅ Application saved!': YES (lines 66-68)
+    PASS
+
+JAVA SOURCE FILES PRESENT
+--------------------------
+- NotificationService.java:   YES
+- NotificationController.java: YES
+- AppUserController.java (updated): YES
+
+STATIC FILES PRESENT
+--------------------
+JS: application.js, Login.js, JOB_TRACKER.js, darkmode.js, notifications.js, Timeline.js, companies.js
+CSS: application.css, Login.css, JOBTRACKER.css, companies.css, settings.css, contacts.css, resources.css, Timeline.css
+
+GIT LOG (last 5 commits)
+------------------------
+928babe feat: FEAT-004 real-time SSE notifications
+9a37c0b feat: FEAT-003 contacts and resources pages
+dae581e feat: FEAT-002 settings page and dark mode
+7a8fe3b feat: FEAT-001 fix dropdown ids and login issues
+
+VERDICT: ALL CHECKS PASS — no integration issues found
