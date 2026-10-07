@@ -1,0 +1,170 @@
+window.addEventListener("DOMContentLoaded", () => {
+
+  const columns = document.querySelectorAll(".tabactive, .tabactive1, .tabactive3, .tabactive4, .tabactive5, .tabactive6");
+
+  // --- File chooser helper ---
+  function selectFile() {
+    return new Promise(resolve => {
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+      fileInput.click();
+      fileInput.onchange = () => resolve(fileInput.files[0] || null);
+    });
+  }
+
+  // --- Create Job Card HTML ---
+  function createJobCardHTML(id, title, date, notes, imgUrl) {
+    return `
+      <article class="job-card" data-id="${id ?? ''}" draggable="true">
+        <div class="card-header">
+          <img src="${imgUrl || '/images/default-company.png'}" alt="Company Logo">
+          <button class="delete-btn" title="Delete Job">✖</button>
+        </div>
+        <h3>${title}</h3>
+        <p class="date">Added on ${date}</p>
+        <p>Notes: ${notes || 'No notes yet'}</p>
+      </article>
+    `;
+  }
+
+  // --- Enable Delete ---
+  function enableDelete(card) {
+    const delBtn = card.querySelector(".delete-btn");
+    if (!delBtn) return;
+    delBtn.addEventListener("click", async () => {
+      if (!confirm("Delete this job?")) return;
+      const jobId = card.getAttribute("data-id");
+      if (jobId) {
+        try {
+          await fetch(`/api/jobs/${jobId}`, { method: "DELETE" });
+        } catch (err) {
+          console.error("Failed to delete job from backend:", err);
+        }
+      }
+      card.remove();
+    });
+  }
+
+  function reattachEvents(column) {
+    const cards = column.querySelectorAll(".job-card");
+    cards.forEach(enableDelete);
+  }
+
+  // --- Push existing HTML cards to backend if they have no ID ---
+  async function pushExistingCards() {
+    for (const column of columns) {
+      const cards = column.querySelectorAll(".job-card");
+      for (const card of cards) {
+        if (card.dataset.id) continue;
+
+        const title = card.querySelector("h3")?.textContent || "";
+        const notes = card.querySelector("p:nth-of-type(2)")?.textContent.replace("Notes: ", "") || "";
+        const date = card.querySelector(".date")?.textContent.replace(/Added on |Applied on |Phone Screen on |Interview on |Offer received |Rejected on |Hired on /, "") || "";
+        const imgUrl = card.querySelector("img")?.src || "/images/default-company.png";
+
+        try {
+          const res = await fetch("/api/jobs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, notes, date, imageUrl: imgUrl })
+          });
+          const savedJob = await res.json();
+          card.dataset.id = savedJob.id;
+        } catch (err) {
+          console.error("Failed to push existing card:", err);
+        }
+      }
+      reattachEvents(column);
+    }
+  }
+
+  // --- Add Job logic ---
+  columns.forEach(column => {
+    const addJobBtn = column.querySelector(".add-job-btn");
+    if (!addJobBtn) return;
+
+    addJobBtn.addEventListener("click", async () => {
+      const title = prompt("Enter Job Title:");
+      if (!title) return;
+      const notes = prompt("Enter Notes:") || "";
+      const date = new Date().toLocaleDateString();
+      let imageUrl = "/images/default-company.png";
+
+      const file = await selectFile();
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        try {
+          const uploadRes = await fetch("/api/images/upload", { method: "POST", body: formData });
+          const result = await uploadRes.json();
+          imageUrl = result.path || imageUrl;
+        } catch (err) {
+          console.warn("Image upload failed, using default.", err);
+        }
+      }
+
+      try {
+        const res = await fetch("/api/jobs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, notes, date, imageUrl })
+        });
+        const newJob = await res.json();
+        const newCardHTML = createJobCardHTML(newJob.id, newJob.title, newJob.date, newJob.notes, newJob.imageUrl);
+        addJobBtn.insertAdjacentHTML("beforebegin", newCardHTML);
+        reattachEvents(column);
+      } catch (err) {
+        console.error("Failed to save job:", err);
+        alert("Could not save job. Please try again.");
+      }
+    });
+  });
+
+  // --- Load jobs from backend ---
+  async function loadJobsFromBackend() {
+    try {
+      const res = await fetch("/api/jobs");
+      if (!res.ok) throw new Error("Failed to fetch jobs");
+      const jobs = await res.json();
+
+      columns.forEach(column => {
+        const addBtn = column.querySelector(".add-job-btn");
+        const subTab = column.querySelector("div[class^='sub-tab']");
+
+        // Remove only existing job cards
+        column.querySelectorAll(".job-card").forEach(card => card.remove());
+
+        // Re-append Add button and sub-tab
+        if (subTab && !column.contains(subTab)) column.prepend(subTab);
+        if (addBtn && !column.contains(addBtn)) column.appendChild(addBtn);
+      });
+
+      // Insert jobs into correct columns
+      jobs.forEach(job => {
+        let column;
+        switch (job.status) {
+          case "APPLIED": column = document.querySelector(".tabactive"); break;
+          case "INTERVIEWING": column = document.querySelector(".tabactive3"); break;
+          case "OFFER": column = document.querySelector(".tabactive4"); break;
+          case "REJECTED": column = document.querySelector(".tabactive5"); break;
+          case "HIRED": column = document.querySelector(".tabactive6"); break;
+          default: column = document.querySelector(".tabactive"); break;
+        }
+
+        if (!column) return;
+        const addBtn = column.querySelector(".add-job-btn");
+        const cardHTML = createJobCardHTML(job.id, job.title, job.date, job.notes, job.imageUrl);
+        addBtn.insertAdjacentHTML("beforebegin", cardHTML);
+        reattachEvents(column);
+      });
+
+    } catch (err) {
+      console.error("Failed to load jobs:", err);
+    }
+  }
+
+  // --- Initialize ---
+  //pushExistingCards().then(loadJobsFromBackend);
+
+});
