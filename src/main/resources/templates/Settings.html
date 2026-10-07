@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings — JobTracker</title>
+    <link rel="stylesheet" th:href="@{/css/settings.css}">
+    <script th:src="@{/js/darkmode.js}"></script>
+</head>
+<body>
+
+<header class="settings-header">
+    <div class="header-left">
+        <img src="/images/886e770a-b523-4bc5-b893-a6c2272e507c.png" alt="JobTracker logo" class="header-logo">
+        <a th:href="@{/}" class="header-brand">JobTracker</a>
+    </div>
+
+    <nav>
+        <a th:href="@{/}">Dashboard</a>
+        <a th:href="@{/Applications}">Applications</a>
+        <a th:href="@{/Settings}" class="active">Settings</a>
+    </nav>
+
+    <div class="header-right">
+        <a href="#" class="prof-container">
+            <img src="/images/Depth 4, Frame 1.png" alt="profile image" class="prof-img">
+        </a>
+    </div>
+</header>
+
+<main class="settings-main">
+    <h1>Settings</h1>
+
+    <!-- Appearance -->
+    <section class="settings-section">
+        <h2>Appearance</h2>
+        <div class="settings-row">
+            <div class="settings-label-group">
+                <strong>Dark Mode</strong>
+                <span>Switch to a darker colour theme</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="darkMode">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </section>
+
+    <!-- Language -->
+    <section class="settings-section">
+        <h2>Language</h2>
+        <div class="settings-row">
+            <div class="settings-label-group">
+                <strong>Display Language</strong>
+                <span>Choose the language used across the app</span>
+            </div>
+            <select id="language">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Notifications -->
+    <section class="settings-section">
+        <h2>Notifications</h2>
+        <div class="settings-row">
+            <div class="settings-label-group">
+                <strong>Email Notifications</strong>
+                <span>Receive updates about your applications by email</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="emailNotif">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="settings-section">
+        <h2>Privacy</h2>
+        <div class="settings-row">
+            <div class="settings-label-group">
+                <strong>Profile Visibility</strong>
+                <span>Control who can see your profile</span>
+            </div>
+            <select id="profileVisibility">
+                <option value="PUBLIC">Public</option>
+                <option value="PRIVATE">Private</option>
+            </select>
+        </div>
+    </section>
+
+    <button class="settings-save-btn" id="saveSettings">Save Settings</button>
+</main>
+
+<div id="toast-container"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Load persisted values
+    var darkModeToggle = document.getElementById('darkMode');
+    var languageSelect = document.getElementById('language');
+    var emailNotifToggle = document.getElementById('emailNotif');
+    var profileVisSelect = document.getElementById('profileVisibility');
+
+    darkModeToggle.checked = localStorage.getItem('darkMode') === 'true';
+    languageSelect.value = localStorage.getItem('language') || 'en';
+    emailNotifToggle.checked = localStorage.getItem('emailNotif') === 'true';
+    profileVisSelect.value = localStorage.getItem('profileVisibility') || 'PUBLIC';
+
+    // Live dark mode toggle
+    darkModeToggle.addEventListener('change', function () {
+        if (this.checked) {
+            document.documentElement.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'true');
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'false');
+        }
+    });
+
+    // Save button
+    document.getElementById('saveSettings').addEventListener('click', function () {
+        localStorage.setItem('darkMode', darkModeToggle.checked ? 'true' : 'false');
+        localStorage.setItem('language', languageSelect.value);
+        localStorage.setItem('emailNotif', emailNotifToggle.checked ? 'true' : 'false');
+        localStorage.setItem('profileVisibility', profileVisSelect.value);
+
+        if (typeof window.showToast === 'function') {
+            window.showToast('Settings saved successfully.');
+        } else {
+            var container = document.getElementById('toast-container');
+            var toast = document.createElement('div');
+            toast.className = 'sse-toast';
+            toast.textContent = 'Settings saved successfully.';
+            container.appendChild(toast);
+            // trigger transition
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    toast.classList.add('sse-toast--visible');
+                });
+            });
+            setTimeout(function () {
+                toast.classList.remove('sse-toast--visible');
+                setTimeout(function () { toast.remove(); }, 350);
+            }, 3000);
+        }
+    });
+});
+</script>
+
+<script th:src="@{/js/notifications.js}"></script>
+</body>
+</html>

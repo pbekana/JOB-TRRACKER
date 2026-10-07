@@ -1,0 +1,534 @@
+.container{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: relative;
+width: 1280px;
+height: 852px;
+
+background: #FFFFFF;
+
+}
+.top{
+/* Depth 2, Frame 0 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 12px 40px;
+
+width: 1280px;
+height: 65px;
+
+border-bottom: 1px solid #E6E8EB;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.left-header{
+display: flex;
+align-items: center;
+width: auto;
+height: auto;
+gap: 32px;
+padding: 0px;
+
+order: 0;
+flex-grow: 0;
+flex: none;
+}
+.icon{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: auto;
+height: auto;
+
+order: 0;
+flex-grow: 0;
+flex: none;
+}
+.icon-container{
+display: flex;
+/*width: 16px;
+height: 16px;*/
+
+flex: none;
+order: 0;
+flex-grow: 1;
+}
+.icon#img{
+width: 16px;
+height: 16px;
+position: absolute;
+left: 0px;
+top: 0px;
+
+color: #121417;
+}
+.title{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: auto;
+height: auto;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+#topic{
+/* JobTracker */
+display: flex;
+width: 100px;
+height: 23px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 23px;
+letter-spacing: 0px;
+
+/* identical to box height, or 128% */
+
+color: #121417;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.right-header{
+display: flex;
+justify-content: flex-end;
+align-items: flex-start;
+width: 1068px;
+height: auto;
+gap: 32px;
+
+order: 1;
+flex-grow: 1;
+}
+nav{
+display: flex;
+align-items: center;
+width: auto;
+height: 40px;
+gap: 36px;
+
+order: 0;
+flex-grow: 0;
+flex: none;
+}
+.submit-btn{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 40px;
+    max-width: 480px;
+    border-radius: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    gap: 8px;
+    background: rgba(240, 242, 245, 1);
+    flex: none;
+    flex-grow: 0;
+    order: 1;
+}
+.submit-btn button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border: none;
+
+    flex-grow: 1;
+    flex: none;
+}
+.prof{
+display: flex;
+order: 2;
+}
+.prof-img{
+width: 40px;
+height: 40px;
+border-radius: 20px;
+}
+
+.secondContainer{
+/* Depth 2, Frame 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: flex-start;
+padding: 20px 160px;
+
+width: 1280px;
+height: 787px;
+
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+}
+.thirdContainer{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 960px;
+max-width: 960px;
+height: auto;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: start;
+}
+.app{
+/* Depth 4, Frame 0 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
+padding: 16px;
+gap: 12px;
+
+width: 960px;
+height: 72px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.app.app{
+/* Depth 5, Frame 0 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 288px;
+min-width: 288px;
+height: 40px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+#app{
+/* My Applications */
+
+width: 288px;
+height: 40px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 40px;
+/* identical to box height, or 125% */
+
+color: #121417;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+.card{
+/* Depth 4, Frame 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px 12px;
+
+width: 960px;
+height: auto;
+
+flex: none;
+order: 1;
+flex-grow: 1;
+
+}
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .delete-btn {
+    background:transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  .delete-btn:hover {
+    color: red;
+  }
+ /* === SETTINGS DROPDOWN === */
+ #section {
+   position: absolute;
+   top: 60px;        /* adjust to appear below header */
+   right: 80px;      /* adjust horizontally */
+   background: #fff;
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   padding: 20px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+   width: 240px;
+   z-index: 1000;    /* ensures it's above the content */
+ }
+
+ #section[hidden] {
+   display: none;
+ }
+
+ #section h2 {
+   font-size: 18px;
+   margin-bottom: 10px;
+ }
+.pprofile{
+position: absolute;
+   top:60px;        /* adjust to appear below header */
+   right: 20px;      /* adjust horizontally */
+   background: #fff;
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   padding: 20px;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+   width: 240px;
+   z-index: 1000;    /* ensures it's above the content */
+}
+/* ================================
+   KANBAN BOARD
+   ================================ */
+
+/* ==============================
+   KANBAN BOARD
+   ============================== */
+
+.detail {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    gap: 16px;
+
+    width: 960px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: 0 16px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==============================
+   KANBAN COLUMNS
+   ============================== */
+
+.tabactive,
+.tabactive1,
+.tabactive3,
+.tabactive4,
+.tabactive5,
+.tabactive6 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 220px;
+    min-width: 220px;
+
+    flex: 0 0 220px;
+
+    gap: 12px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==============================
+   COLUMN HEADERS
+   ============================== */
+
+.sub-tab,
+.sub-tab1,
+.sub-tab3,
+.sub-tab4,
+.sub-tab5,
+.sub-tab6 {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    box-sizing: border-box;
+
+    background: #f0f2f5;
+
+    border-radius: 8px;
+}
+
+
+.sub-tab p,
+.sub-tab1 p,
+.sub-tab3 p,
+.sub-tab4 p,
+.sub-tab5 p,
+.sub-tab6 p {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #121417;
+}
+
+
+/* ==============================
+   JOB CARDS
+   ============================== */
+
+.job-card {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    gap: 6px;
+
+    padding: 12px;
+    margin: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e6e8eb;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    cursor: grab;
+}
+
+
+.job-card img {
+    width: 40px;
+    height: 40px;
+
+    object-fit: cover;
+
+    border-radius: 4px;
+}
+
+
+.job-card h3 {
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #121417;
+}
+
+
+.job-card .date {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #61758a;
+}
+
+
+.job-card p {
+    margin: 2px 0;
+
+    font-size: 13px;
+
+    color: #444;
+}
+
+
+/* ==============================
+   ADD JOB BUTTON
+   ============================== */
+
+.add-job-btn {
+    width: 100%;
+
+    padding: 10px;
+
+    margin: 0;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #f0f2f5;
+
+    color: #555;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.add-job-btn:hover {
+    background: #e6e8eb;
+}
+/* ===== Dark Mode ===== */
+body.dark-mode { background-color:#1a1a2e; color:#e0e0e0; }
+body.dark-mode .container, body.dark-mode .top, body.dark-mode .thirdContainer { background-color:#16213e; border-color:#2a2a4e; }
+body.dark-mode .job-card { background-color:#0f3460; border-color:#1a4a80; color:#e0e0e0; }
+body.dark-mode #topic, body.dark-mode #app, body.dark-mode .para-dash, body.dark-mode .para-app, body.dark-mode .para-set { color:#e0e0e0; }
+body.dark-mode .sub-tab, body.dark-mode .sub-tab1, body.dark-mode .sub-tab3, body.dark-mode .sub-tab4, body.dark-mode .sub-tab5, body.dark-mode .sub-tab6 { background-color:#0f3460; color:#e0e0e0; }

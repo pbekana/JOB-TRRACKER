@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applications</title>
     <link rel="stylesheet" th:href="@{/css/application.css}">
+    <script th:src="@{/js/darkmode.js}"></script>
 </head>
 <body>
 <div class="container">
@@ -30,37 +31,7 @@
                     <a th:href="@{/Applications}"><p id="application">Application</p></a>
                 </div>
                 <div class="setting">
-                    <a href="#" id="set"><p id="setting">Setting</p></a>
-
-                    <section  id="section" hidden="true">
-                        <h2>Setting</h2>
-
-                        <label >
-                            <input type="checkbox" id="darkMode">Dark Mode
-                        </label> <br><br>
-
-                        <label >
-                            Language:
-                            <select id="language">
-                                <option value="en">English</option>
-                                <option value="en">Spanish</option>
-                            </select>
-                        </label> <br><br>
-
-                        <label >
-                            <input type="checkbox" id="Email Notifications">Email Notifications
-                        </label> <br><br>
-
-                        <label >
-                            profile visibility:
-                            <select id=" profile visibility">
-                                <option value="PUBLIC">public</option>
-                                <option value="PRIVATE">private</option>
-                            </select>
-                        </label> <br><br>
-
-                        <button onclick="saveSetting()">Save Settings</button>
-                    </section>
+                    <a th:href="@{/Settings}"><p id="setting">Settings</p></a>
                 </div>
             </nav>
            <div class="IMG-container">

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker</title>
+    <link rel="stylesheet" th:href="@{/css/JOBTRACKER.css}">
+    <script th:src="@{/js/darkmode.js}"></script>
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <div class="left-header">
+            <div class="img-container">
+                <div class="img-png">
+
+                    <img src="images\886e770a-b523-4bc5-b893-a6c2272e507c.png" alt="Job Tracker" class="icon">
+
+                </div>
+            </div>
+
+
+            <div class="title-container">
+                <h1 class="Title">JobTracker</h1>
+            </div>
+        </div>
+
+
+        <div class="right-header">
+            <nav class="links">
+                <div class="dash">
+                    <a th:href="@{/}"><p class="para-dash">Dashboard</p></a>
+                </div>
+                <div class="app">
+                    <a th:href="@{/Applications}"><p class="para-app">Applications</p></a>
+                </div>
+                <div class="comp">
+                    <a th:href="@{/Companies}"><p class="para-comp">Companies</p></a>
+                </div>
+                <div class="con">
+                    <a th:href="@{/Contacts}"><p class="para-cont">Contacts</p></a>
+                </div>
+                <div class="res">
+                    <a th:href="@{/Resources}"><p class="para-res">Resources</p></a>
+                </div>
+                <div class="log">
+                    <a th:href="@{/Login}"><p class="para-res">Login</p></a>
+                </div>
+                <div class="set">
+                    <a th:href="@{/Settings}"><p class="para-res">Settings</p></a>
+                </div>
+
+            </nav>
+
+            <div class="submit-btn">
+                <div class="btn-container">
+                    <button ><img class="img-btn" src="images\Vector - 0.png" alt="btn image"></button>
+                </div>
+            </div>
+
+            <div class="IMG-container">
+                <a href="" id="prof-a"><img id="img" src="images/41e7896454c22158373f7be786610fa6a68c185e.png" alt="image of tracer" class="img"></a>
+                <div id="container-profile" hidden="true">
+                    <h2 id="username" class="hidden"  >John Doe</h2>
+                    <p id="userBio"  class="hidden">Web Developer</p>
+                    <button onclick="editProfile()" id="prof-btn"  class="hidden">Edit Profile</button>
+                </div>
+            </div>
+
+
+        </div>
+    </header>
+
+    <div class="second-container">
+        <div class="third-container">
+            <div class="dashboard-container">
+
+                <div class="dashboard">
+                    <div class="dashTitle">
+                        <h3 class="title">Dashboard</h3>
+                    </div>
+                    <div class="paragraphTitle">
+                        <p class="paragraph">Welcome back,Dr</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="App">
+                <div class="insideApp">
+                    <div class="tot-app">
+                        <h6 class="tApp">Total Application</h6>
+                    </div>
+                    <div class="tot-num">
+                        <h6 class="tnum" th:text="${total}">0</h6>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ApplicationStages">
+                <h6 class="appStage">Application Stages</h6>
+            </div>
+
+            <div class="summaryStage">
+                <div class="applied">
+                    <p>Applied</p>
+                    <p th:text="${applied}">0</p>
+                </div>
+                <div class="interviewing">
+                    <p>Interviewing</p>
+                    <p  th:text="${interviewing}">0</p>
+                </div>
+                <div class="offer">
+                    <p>Offer</p>
+                    <p  th:text="${offer}">0</p>
+                </div>
+                <div class="rejected">
+                    <p>Rejected</p>
+                    <p  th:text="${rejected}">0</p>
+                </div>
+            </div>
+
+            <div class="RecentlyActivity">
+                <p>Recently Activity</p>
+            </div>
+
+            <div class="summary">
+                <div class="summary-container">
+                    <div class="para-container">
+                        <p class="para-appl">Application This Week</p>
+                    </div>
+
+                    <div class="week">
+                        <div class="day-week">
+                            <div class="mon-box"></div>
+                            <span class="mon-label">Mon</span>
+                        </div>
+
+
+                        <div class="day-week">
+                            <div class="tue-box"></div>
+                            <span class="tue-label">Tue</span>
+                        </div>
+
+
+                        <div class="day-week">
+                            <div class="wed-box"></div>
+                            <span class="wed-label">Wed</span>
+                        </div>
+
+                        <div class="day-week">
+                            <div class="thurs-box"></div>
+                            <span class="thurs-label">thurs</span>
+                        </div>
+                        <div class="day-week">
+                            <div class="fri-box"></div>
+                            <span class="fri-label">Fri</span>
+                        </div>
+
+                        <div class="day-week">
+                            <div class="sat-box"></div>
+                            <span class="sat-label">Sat</span>
+                        </div>
+
+
+
+                        <div class="day-week">
+                            <div class="sun-box"></div>
+                            <div class="sun-label">Sun</div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <div class="submitt-button">
+                    <div class="fbutton">
+                        <button type="submit"><p class="paraf">Add Application</p></button>
+                    </div>
+
+                    <div class="lbutton">
+                        <button type="submit"><p class="paral">View All Application</p></button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="appList"></div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/JOB_TRACKER.js}"></script>
+</body>
+</html>

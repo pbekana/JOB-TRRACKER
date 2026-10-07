@@ -1326,3 +1326,9 @@ order: 0;
     padding: 12px 16px;
   }
 }
+
+/* ===== Dark Mode ===== */
+body.dark-mode { background-color:#1a1a2e; color:#e0e0e0; }
+body.dark-mode .container, body.dark-mode header, body.dark-mode .third-container { background-color:#16213e; border-color:#2a2a4e; }
+body.dark-mode .para, body.dark-mode .para-account, body.dark-mode .para-cloud, body.dark-mode .export-para, body.dark-mode .password-para, body.dark-mode .delete-para { color:#e0e0e0; }
+body.dark-mode .cloud-container, body.dark-mode .Export, body.dark-mode .Export-pdf, body.dark-mode .password, body.dark-mode .Delete { background-color:#0f3460; }
