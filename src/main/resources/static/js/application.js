@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       statusMessage.textContent = "✅ Application saved!";
       statusMessage.style.color = "green";
+      if (typeof window.showToast === 'function') {
+        window.showToast('Application saved: ' + applicationData.jobTitle + ' at ' + applicationData.company);
+      }
 
       // Reset form fields
       document.querySelector("form")?.reset?.();
