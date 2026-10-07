@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.file.*;
 
@@ -15,6 +16,15 @@ public class UploadController {
 
     @Value("${upload.dir:uploads}")
     private String uploadDir;
+
+    @PostConstruct
+    public void init() {
+        try {
+            Files.createDirectories(Paths.get(uploadDir));
+        } catch (IOException e) {
+            throw new IllegalStateException("Cannot create upload directory: " + uploadDir, e);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<?> uploadFiles(

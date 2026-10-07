@@ -109,34 +109,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- Push existing HTML cards to backend if they have no ID ---
-  async function pushExistingCards() {
-    for (const column of columns) {
-      const cards = column.querySelectorAll(".job-card");
-      for (const card of cards) {
-        if (card.dataset.id) continue;
-
-        const title = card.querySelector("h3")?.textContent || "";
-        const notes = card.querySelector("p:nth-of-type(2)")?.textContent.replace("Notes: ", "") || "";
-        const date = card.querySelector(".date")?.textContent.replace(/Added on |Applied on |Phone Screen on |Interview on |Offer received |Rejected on |Hired on /, "") || "";
-        const imgUrl = card.querySelector("img")?.src || "/images/default-company.png";
-
-        try {
-          const res = await fetch("/api/jobs", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ title, notes, date, imageUrl: imgUrl })
-          });
-          const savedJob = await res.json();
-          card.dataset.id = savedJob.id;
-        } catch (err) {
-          console.error("Failed to push existing card:", err);
-        }
-      }
-      reattachEvents(column);
-    }
-  }
-
   // --- Add Job logic ---
   columns.forEach(column => {
     const addJobBtn = column.querySelector(".add-job-btn");

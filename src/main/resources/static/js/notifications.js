@@ -101,6 +101,7 @@
         cancelBtn.textContent = 'Cancel';
         cancelBtn.className = 'jt-btn-cancel';
         cancelBtn.addEventListener('click', function () {
+            document.removeEventListener('keydown', escHandler);
             closeModal(overlay);
             if (typeof onCancel === 'function') onCancel();
         });
@@ -109,6 +110,7 @@
         confirmBtn.textContent = 'Confirm';
         confirmBtn.className = 'jt-btn-confirm';
         confirmBtn.addEventListener('click', function () {
+            document.removeEventListener('keydown', escHandler);
             closeModal(overlay);
             if (typeof onConfirm === 'function') onConfirm();
         });
@@ -172,6 +174,7 @@
         cancelBtn.className = 'jt-btn-cancel';
         cancelBtn.type = 'button';
         cancelBtn.addEventListener('click', function () {
+            document.removeEventListener('keydown', escHandler);
             closeModal(overlay);
             if (typeof onCancel === 'function') onCancel();
         });
@@ -194,6 +197,7 @@
             if (!valid) return;
 
             var values = inputs.map(function (inp) { return inp.value; });
+            document.removeEventListener('keydown', escHandler);
             closeModal(overlay);
             if (typeof onSubmit === 'function') onSubmit(values);
         });
