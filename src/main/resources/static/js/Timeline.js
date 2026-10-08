@@ -96,6 +96,12 @@ const username=document.getElementById("username");
         const profile_container=document.querySelector(".avatar");
         const prof=document.querySelector(".prof");
 
+    // Display the logged-in user's email as the profile name
+    const loggedInEmail = localStorage.getItem("loggedInEmail");
+    if (loggedInEmail && username) {
+        username.textContent = loggedInEmail;
+    }
+
     profile_container.addEventListener("click",(e)=>{
   e.preventDefault();
   e.stopPropagation();

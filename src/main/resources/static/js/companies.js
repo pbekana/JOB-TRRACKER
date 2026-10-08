@@ -228,6 +228,13 @@ window.addEventListener("DOMContentLoaded", () => {
   const profLink = document.querySelector(".prof");
   const pprofile = document.querySelector(".pprofile");
   if (profLink && pprofile) {
+    // Display the logged-in user's email as the profile name
+    const loggedInEmail = localStorage.getItem("loggedInEmail");
+    const usernameEl = pprofile.querySelector(".username");
+    if (loggedInEmail && usernameEl) {
+      usernameEl.textContent = loggedInEmail;
+    }
+
     profLink.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();

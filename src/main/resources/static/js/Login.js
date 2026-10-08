@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.showToast("Signup successful", "success");
         form.reset();
         currentUserEmail = email;
+        localStorage.setItem("loggedInEmail", email);
         [cloud_container, Export, Export_pdf, data_container, security_container, password, Delete].forEach(el => {
           if (el) el.classList.remove("hidden");
         });
@@ -137,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
       window.showToast("Login successful", "success");
       currentUserEmail = email;
+      localStorage.setItem("loggedInEmail", email);
       [cloud_container, Export, Export_pdf, data_container, security_container, password, Delete].forEach(el => {
         if (el) el.classList.remove("hidden");
       });
@@ -293,6 +295,11 @@ window.onload = function () {
   function handleGoogleLogin(response) {
       const payload = JSON.parse(atob(response.credential.split('.')[1]));
       console.log(payload);
+      const email = (payload.email || "").toLowerCase().trim();
+      if (email) {
+        currentUserEmail = email;
+        localStorage.setItem("loggedInEmail", email);
+      }
   }
   }
 

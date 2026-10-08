@@ -52,6 +52,12 @@ function setupQuickActions() {
     const profBtn = document.getElementById("prof-btn");
     const  container_profile= document.getElementById("container-profile");
 
+        // Display the logged-in user's email as the profile name
+        const loggedInEmail = localStorage.getItem("loggedInEmail");
+        if (loggedInEmail && username) {
+            username.textContent = loggedInEmail;
+        }
+
         profile.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();

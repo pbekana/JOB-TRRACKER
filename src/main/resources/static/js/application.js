@@ -163,6 +163,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const profContainer = document.querySelector(".prof-container");
   const containerProfile = document.getElementById("container-profile");
   if (profContainer && containerProfile) {
+    // Display the logged-in user's email as the profile name
+    const loggedInEmail = localStorage.getItem("loggedInEmail");
+    const usernameEl = document.getElementById("username");
+    if (loggedInEmail && usernameEl) {
+      usernameEl.textContent = loggedInEmail;
+    }
+
     profContainer.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
